@@ -1,6 +1,40 @@
 {
   "nombre": "Casa Polo",
   "visible": true,
-  "orden": 7,
-  "categoria": "Casas"
+  "orden": 6,
+  "categoria": "Casas",
+  "ubicacion": "Maitencillo, V Región",
+  "anio": "2026",
+  "superficie": 140,
+  "pisos": 2,
+  "estado": "En proyecto",
+  "materialidad": "Estructura Metalica y Paneles SIP revestidos con madera y zinc emballetado.",
+  "programa": [
+    "4 Dormitorios",
+    "4 Baños",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Logia",
+    "Quincho"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/05.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/01-1.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/02.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/03-1.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
