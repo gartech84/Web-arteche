@@ -235,6 +235,25 @@ img{display:block;max-width:100%}
   @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 }
 
+
+/* Servicios sobre fondo claro */
+.svc-sec{background:var(--cream);color:var(--ink);padding-top:0}
+.svc-sec .label{color:var(--muted)}
+.svc-list{border-bottom-color:var(--line-light)}
+.svc{border-top-color:var(--line-light)}
+.svc-n{color:var(--muted)}
+.svc-ic svg{stroke:var(--navy)}
+.svc-plus{border-color:rgba(30,30,30,.35)}
+.svc-plus::before,.svc-plus::after{background:var(--ink)}
+.svc.open .svc-plus{background:var(--navy);border-color:var(--navy)}
+.svc.open .svc-plus::before,.svc.open .svc-plus::after{background:#fff}
+.svc-inner p{color:var(--muted)}
+.svc-tags li{border-color:rgba(15,26,38,.28);color:var(--navy)}
+.svc-cta p{color:var(--muted)}
+.svc-sec .pill{background:var(--navy);color:#fff}
+.svc-sec .pill:hover{background:#1d2b3a}
+@media (hover:hover){ .svc-head:hover .svc-plus{border-color:var(--ink)} }
+.site-foot{border-top:0}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMEYxQTI2Ii8+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoOSA4KSBzY2FsZSgwLjE5NikiPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xMTIgMEgxOTNMODEgMjMzSDBaIi8+PHBhdGggZmlsbD0iI2ZmZiIgZmlsbC1vcGFjaXR5PSIuNDUiIGQ9Ik0xOTMgMEwyMjcgMTk3SDE1MUwxMzYgMTE5WiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xNTEgMTk3SDIyN0wyMzEgMjMzSDE1N1oiLz48L2c+PC9zdmc+" type="image/svg+xml">
@@ -300,7 +319,7 @@ img{display:block;max-width:100%}
 
   <section class="svc-sec" aria-labelledby="t-serv">
     <div class="wrap">
-      <div class="svc-top reveal">
+      <div class="svc-top reveal rule" style="padding-top:clamp(28px,3.4vw,48px)">
         <h2 class="label" id="t-serv">Servicios</h2>
         <p class="h2">Qué hacemos.</p>
       </div>
