@@ -37,3 +37,4 @@ Para ocultar un proyecto sin borrarlo, desmarca «Mostrar en la web».
 Para cambiar el orden en la grilla, cambia el número de «Orden».
 
 Las fotos se optimizan solas al publicar (1600 px y miniatura de 900 px). Súbelas en buena calidad.
+
