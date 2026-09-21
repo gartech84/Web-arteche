@@ -1,0 +1,69 @@
+{
+  "nombre": "Casa Las Vertientes",
+  "visible": true,
+  "orden": 3,
+  "categoria": "Casas",
+  "ubicacion": "Lago Ranco, XIV Región",
+  "anio": "2026",
+  "superficie": 245,
+  "pisos": 1,
+  "estado": "En construcción",
+  "materialidad": "Paneles prefabricados SIP revestidos en madera.",
+  "programa": [
+    "6 dormitorios",
+    "7 baños",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Estar",
+    "Logia",
+    "Hall de acceso",
+    "Walk-in closet principal"
+  ],
+  "renders": true,
+  "portada": "/media/proyectos/casa-las-vertientes/portada.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/panoramica.jpg",
+      "formato": "Panorámica",
+      "encuadre": "Centro",
+      "descripcion": "Vista general de la casa sobre la loma, con el bosque detrás"
+    },
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/terraza.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Volúmenes de madera sobre pilotes y terraza escalonada"
+    },
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/frontal.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Fachada principal con galería y graderías hacia el prado"
+    },
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/jardin.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro",
+      "descripcion": "Fachada con galerías de madera y sendero de acceso"
+    },
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/portada.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro",
+      "descripcion": "Living con salamandra central y comedor al fondo"
+    },
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/living-patio.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro",
+      "descripcion": "Living con patio interior y circulación hacia los dormitorios"
+    },
+    {
+      "foto": "/media/proyectos/casa-las-vertientes/cocina.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro",
+      "descripcion": "Cocina con isla de mármol y cerchas a la vista"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "nombre": "Casa El Arrayán",
+  "visible": true,
+  "orden": 2,
+  "categoria": "Casas",
+  "ubicacion": "Santo Domingo, V Región",
+  "anio": "2026",
+  "superficie": 215,
+  "pisos": 2,
+  "estado": "En construcción",
+  "materialidad": "Paneles prefabricados SIP revestidos en madera.",
+  "programa": [
+    "4 dormitorios",
+    "4 baños",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Estar",
+    "Logia",
+    "Hall de acceso",
+    "Walk-in closet principal"
+  ],
+  "renders": true,
+  "portada": "/media/proyectos/casa-el-arrayan/portada.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/portada.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Fachada de acceso en madera con volumen superior negro"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/esquina.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Vista en esquina del acceso y el volumen superior"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/posterior.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Abajo",
+      "descripcion": "Fachada posterior hacia el jardín"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/living.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro",
+      "descripcion": "Living con escalera de peldaños volados"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/comedor.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro",
+      "descripcion": "Comedor en desnivel junto al living"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/escalera.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro",
+      "descripcion": "Escalera y living con vista al jardín"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/pasillo.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro",
+      "descripcion": "Pasillo de dormitorios"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/dormitorio.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Dormitorio principal"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/bano.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Baño con ducha y lucarna"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/cocina.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Cocina con isla y comedor de diario"
+    },
+    {
+      "foto": "/media/proyectos/casa-el-arrayan/cocina-acceso.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Acceso a la cocina con puerta corredera"
+    }
+  ]
+}

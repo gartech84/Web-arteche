@@ -1,0 +1,57 @@
+{
+  "nombre": "Casa Campo Viejo",
+  "visible": true,
+  "orden": 1,
+  "categoria": "Casas",
+  "ubicacion": "Maitencillo, V Región",
+  "anio": "2026",
+  "superficie": 240,
+  "estado": "En construcción",
+  "materialidad": "Estructura de madera laminada, muros y tabiques prefabricados revestidos en madera.",
+  "programa": [
+    "5 dormitorios",
+    "3 baños",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Estar",
+    "Logia",
+    "Hall de acceso",
+    "Despensa",
+    "Walk-in closet principal"
+  ],
+  "renders": true,
+  "portada": "/media/proyectos/casa-campo-viejo/portada.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/casa-campo-viejo/portada.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Casa Campo Viejo, terraza elevada entre eucaliptus"
+    },
+    {
+      "foto": "/media/proyectos/casa-campo-viejo/piscina.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Terraza con piscina y volúmenes vidriados"
+    },
+    {
+      "foto": "/media/proyectos/casa-campo-viejo/living.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Living hundido con ventanales hacia el bosque"
+    },
+    {
+      "foto": "/media/proyectos/casa-campo-viejo/cocina.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
+      "descripcion": "Comedor y cocina con vigas de madera a la vista"
+    },
+    {
+      "foto": "/media/proyectos/casa-campo-viejo/fachada.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro",
+      "descripcion": "Fachada posterior con vista al mar"
+    }
+  ]
+}
