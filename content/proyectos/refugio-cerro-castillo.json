@@ -1,6 +1,42 @@
 {
   "nombre": "Refugio Cerro Castillo",
   "visible": true,
-  "orden": 6,
-  "categoria": "Casas"
+  "orden": 7,
+  "categoria": "Casas",
+  "ubicacion": "Villa Cerro Castillo, XI Región",
+  "anio": "2025",
+  "superficie": 40,
+  "pisos": 1,
+  "estado": "En proyecto",
+  "materialidad": "Estructura y revestimientos en madera",
+  "programa": [
+    "2 Dormitorios",
+    "1 Baño",
+    "Living",
+    "Cocina"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/1.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/3.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/4.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/fff.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
