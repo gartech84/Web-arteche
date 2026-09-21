@@ -34,7 +34,7 @@ async function photo(url) {
   let r;
   if (sharp) {
     const lg = `${dir}/${base}.jpg`, sm = `${dir}/${base}-sm.jpg`;
-    await sharp(rel).rotate().resize({ width: 1600, height: 1600, fit: 'inside', withoutEnlargement: true }).flatten({ background: '#ffffff' }).jpeg({ quality: 80, mozjpeg: true }).toFile(path.join(OUT, lg));
+    await sharp(rel).rotate().resize({ width: 2000, height: 2000, fit: 'inside', withoutEnlargement: true }).flatten({ background: '#ffffff' }).jpeg({ quality: 82, mozjpeg: true }).toFile(path.join(OUT, lg));
     await sharp(rel).rotate().resize({ width: 900, height: 900, fit: 'inside', withoutEnlargement: true }).flatten({ background: '#ffffff' }).jpeg({ quality: 76, mozjpeg: true }).toFile(path.join(OUT, sm));
     r = { lg, sm };
   } else {
@@ -73,7 +73,10 @@ for (const p of proyectos) {
     const f = await photo(g.foto); if (!f) continue;
     const forma = FORM[g.formato] || 'sq', pos = POS[g.encuadre] || POS['Centro'];
     const alt = esc(g.descripcion || `${p.nombre}, imagen ${i + 1}`);
-    gal += `<li class="g-item g-${forma}"><button type="button" class="g-btn" data-i="${i}" aria-label="Ampliar imagen ${i + 1}: ${alt}"><img src="${f.sm}" data-full="${f.lg}" alt="${alt}" loading="lazy" style="object-position:${pos}"></button></li>`;
+    // el navegador elige la versión grande cuando la foto ocupa mucho ancho (pantallas grandes o de alta densidad)
+    const sizes = (forma === 'wide' || forma === 'pano') ? '(min-width:1600px) 1520px, 94vw' : '(min-width:700px) 47vw, 94vw';
+    const srcset = f.sm !== f.lg ? ` srcset="${f.sm} 900w, ${f.lg} 2000w" sizes="${sizes}"` : '';
+    gal += `<li class="g-item g-${forma}"><button type="button" class="g-btn" data-i="${i}" aria-label="Ampliar imagen ${i + 1}: ${alt}"><img src="${f.sm}"${srcset} data-full="${f.lg}" alt="${alt}" loading="lazy" style="object-position:${pos}"></button></li>`;
   }
   const port = await photo(p.portada || galeria[0]?.foto);
   const desc = [p.nombre, [CAT1[p.categoria] ? CAT1[p.categoria].toLowerCase() : '', p.ubicacion ? `en ${p.ubicacion}` : ''].filter(Boolean).join(' '), p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(', ') + '. Proyecto de Gonzalo Arteche Arquitecto.';
@@ -88,7 +91,7 @@ for (const p of proyectos) {
   const port = await photo(p.portada || (p.galeria || [])[0]?.foto);
   const meta = [p.ubicacion, p.anio, p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(' · ');
   const badge = p.estado && p.estado !== 'Construido' ? `<span class="badge">${esc(p.estado)}</span>` : '';
-  const media = port ? `<img src="${port.sm}" alt="${esc(p.nombre)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
+  const media = port ? `<img src="${port.sm}"${port.sm !== port.lg ? ` srcset="${port.sm} 900w, ${port.lg} 2000w" sizes="(min-width:1100px) 31vw, (min-width:620px) 47vw, 94vw"` : ''} alt="${esc(p.nombre)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
   const open = p.pagina ? `<a href="${p.pagina}">` : '<a>';
   cards += `        <li class="card" data-cat="${esc(p.categoria)}">
           ${open}
