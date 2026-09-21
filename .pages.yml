@@ -1,0 +1,103 @@
+# Configuración del panel de edición (Pages CMS) — app.pagescms.org
+media:
+  input: media/proyectos
+  output: /media/proyectos
+  rename: safe
+  extensions: [jpg, jpeg, png, webp]
+
+content:
+  - name: proyectos
+    label: Proyectos
+    type: collection
+    path: content/proyectos
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: nombre
+      fields: [nombre, categoria, estado, visible, orden]
+      sort: [orden, nombre]
+      default:
+        sort: orden
+        order: asc
+    fields:
+      - name: nombre
+        label: Nombre del proyecto
+        type: string
+        required: true
+      - name: visible
+        label: Mostrar en la web
+        type: boolean
+        default: true
+      - name: orden
+        label: Orden en la grilla
+        description: "1 aparece primero. Deja espacio entre números (10, 20, 30…) para intercalar después."
+        type: number
+      - name: categoria
+        label: Categoría
+        type: select
+        required: true
+        options:
+          values: [Casas, Comercial, Quinchos y remodelaciones]
+      - name: ubicacion
+        label: Ubicación
+        description: "Ej: Maitencillo, V Región"
+        type: string
+      - name: anio
+        label: Año
+        type: string
+      - name: superficie
+        label: Superficie (m²)
+        type: number
+      - name: pisos
+        label: Pisos
+        type: number
+      - name: estado
+        label: Estado
+        type: select
+        options:
+          values: [Construido, En construcción, En proyecto]
+      - name: materialidad
+        label: Materialidad
+        type: text
+      - name: programa
+        label: Programa (recintos)
+        description: "Un recinto por línea. Ej: 4 dormitorios"
+        type: string
+        list: true
+      - name: renders
+        label: Las imágenes son renders
+        description: "Muestra la nota «Imágenes: renders del proyecto»."
+        type: boolean
+        default: false
+      - name: portada
+        label: Foto de portada
+        description: "Se usa en la grilla de Proyectos. Idealmente vertical o cuadrada."
+        type: image
+      - name: galeria
+        label: Galería
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "Foto {index} · {formato}"
+        fields:
+          - name: foto
+            label: Foto
+            type: image
+            required: true
+          - name: formato
+            label: Formato en la galería
+            description: "Cuadrada y Vertical van de a dos por fila. Horizontal y Panorámica ocupan todo el ancho."
+            type: select
+            default: Cuadrada
+            options:
+              values: [Cuadrada, Vertical, Horizontal, Panorámica]
+          - name: encuadre
+            label: Encuadre del recorte
+            type: select
+            default: Centro
+            options:
+              values: [Arriba, Centro, Abajo]
+          - name: descripcion
+            label: Descripción breve (para buscadores y lectores de pantalla)
+            type: string
