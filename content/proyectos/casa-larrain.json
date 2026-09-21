@@ -1,6 +1,72 @@
 {
   "nombre": "Casa Larraín",
   "visible": true,
-  "orden": 5,
-  "categoria": "Casas"
+  "orden": 4,
+  "categoria": "Casas",
+  "ubicacion": "Santo Domingo, V Región",
+  "anio": "2026",
+  "superficie": 220,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Estructura Metalica y Paneles SIP, revestido en madera.",
+  "programa": [
+    "5 Dormitorios",
+    "4 Baños",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Logia",
+    "Hall de Acceso",
+    "Quincho",
+    "Estar"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/08.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/06.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/nuevo1.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/07.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/03.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/04.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/01.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/living01.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/living02.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/planta-croquis.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    }
+  ]
 }
