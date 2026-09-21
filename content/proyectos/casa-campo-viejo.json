@@ -53,6 +53,11 @@
       "formato": "Horizontal",
       "encuadre": "Centro",
       "descripcion": "Fachada posterior con vista al mar"
+    },
+    {
+      "foto": "/media/proyectos/77.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
     }
   ]
 }
