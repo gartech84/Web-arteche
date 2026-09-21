@@ -245,6 +245,23 @@ textarea.inp{resize:vertical;min-height:110px;line-height:1.5}
 }
 
 .icons svg .fillp{fill:#fff;stroke:none}
+
+/* Política de privacidad: enlace sutil que abre un recuadro */
+.priv{position:relative;margin-top:18px}
+.priv-btn{padding:6px 0;border:0;background:none;font:inherit;font-size:13px;color:var(--muted);text-decoration:underline;text-underline-offset:3px;text-decoration-color:rgba(30,30,30,.3);cursor:pointer}
+.priv-btn:hover{color:var(--ink);text-decoration-color:currentColor}
+.priv-pop{position:absolute;left:0;bottom:calc(100% + 12px);z-index:10;width:min(520px,calc(100vw - 32px));padding:22px 22px 18px;border-radius:16px;background:rgba(15,26,38,.96);color:#E8ECEF;box-shadow:0 18px 50px rgba(0,0,0,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);animation:privIn .22s ease-out}
+.priv-pop[hidden]{display:none}
+.priv-pop::after{content:"";position:absolute;left:28px;top:100%;border:8px solid transparent;border-top-color:rgba(15,26,38,.96)}
+.priv-t{margin:0 32px 12px 0;font-size:16px;color:#fff}
+.priv-body{max-height:min(52vh,420px);overflow:auto;padding-right:6px}
+.priv-body p{margin:0 0 10px;font-size:13.5px;line-height:1.55;color:#C9D1D9}
+.priv-body b{font-weight:500;color:#fff}
+.priv-x{position:absolute;top:10px;right:10px;width:36px;height:36px;border:0;background:none;cursor:pointer}
+.priv-x::before,.priv-x::after{content:"";position:absolute;left:10px;right:10px;top:50%;height:1.5px;background:#fff;transform:rotate(45deg)}
+.priv-x::after{transform:rotate(-45deg)}
+@keyframes privIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){ .priv-pop{animation:none} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -312,6 +329,21 @@ textarea.inp{resize:vertical;min-height:110px;line-height:1.5}
         <p class="err" data-err="envio" hidden>No pudimos enviar el mensaje. Escríbenos por WhatsApp o al correo de más abajo.</p>
         <div class="submit-row">
           <button class="pill pill-send" type="submit">Enviar<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg></button>
+        </div>
+        <div class="priv">
+          <button class="priv-btn" type="button" id="privBtn" aria-expanded="false" aria-controls="privPop">Política de privacidad</button>
+          <div class="priv-pop" id="privPop" role="dialog" aria-labelledby="privT" hidden>
+            <button class="priv-x" type="button" aria-label="Cerrar"></button>
+            <p class="priv-t" id="privT">Política de privacidad</p>
+            <div class="priv-body">
+              <p><b>Responsable.</b> Gonzalo Arteche Rautenberg, Gonzalo Arteche Arquitecto, Santiago, Chile. Contacto: contacto@artechearquitecto.com.</p>
+              <p><b>Qué datos recogemos.</b> Los que ingresas en este formulario: nombre, teléfono, correo y la información sobre tu proyecto.</p>
+              <p><b>Para qué los usamos.</b> Para responder tu consulta, coordinar una reunión y preparar una propuesta de servicios. No los usamos para publicidad ni los vendemos o cedemos a terceros.</p>
+              <p><b>Cómo se procesan.</b> El formulario se envía a nuestro correo a través de un servicio externo de envío de formularios, que solo los transmite. Para medir las visitas usamos una herramienta de estadísticas que no usa cookies ni identifica a las personas.</p>
+              <p><b>Cuánto tiempo los guardamos.</b> Mientras dure la conversación sobre tu proyecto y, si trabajamos juntos, durante el tiempo que exija la ley. Si no avanzamos, los eliminamos cuando nos lo pidas.</p>
+              <p><b>Tus derechos.</b> Puedes pedir acceso, corrección, eliminación u oposición al uso de tus datos escribiendo a contacto@artechearquitecto.com. Te responderemos a la brevedad.</p>
+            </div>
+          </div>
         </div>
 
         <div class="sent" id="sent" hidden role="status">
@@ -485,6 +517,19 @@ textarea.inp{resize:vertical;min-height:110px;line-height:1.5}
   if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in')});return;}
   var io=new IntersectionObserver(function(entries){entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}})},{rootMargin:'0px 0px -10% 0px'});
   els.forEach(function(e){io.observe(e)});
+})();
+</script>
+<script>
+/* Política de privacidad: abrir y cerrar el recuadro */
+(function(){
+  var b=document.getElementById('privBtn'), p=document.getElementById('privPop'); if(!b||!p) return;
+  function open(){ p.hidden=false; b.setAttribute('aria-expanded','true'); p.querySelector('.priv-x').focus({preventScroll:true});
+    var r=p.getBoundingClientRect(); if(r.top<16) window.scrollBy({top:r.top-16,behavior:'smooth'}); }
+  function close(){ if(p.hidden) return; p.hidden=true; b.setAttribute('aria-expanded','false'); b.focus({preventScroll:true}); }
+  b.addEventListener('click',function(e){ e.stopPropagation(); p.hidden?open():close(); });
+  p.querySelector('.priv-x').addEventListener('click',close);
+  document.addEventListener('click',function(e){ if(!p.hidden && !p.contains(e.target)) close(); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') close(); });
 })();
 </script>
 </body>
