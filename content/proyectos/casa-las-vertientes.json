@@ -20,7 +20,7 @@
     "Hall de acceso",
     "Walk-in closet principal"
   ],
-  "renders": true,
+  "renders": false,
   "portada": "/media/proyectos/casa-las-vertientes/portada.jpg",
   "galeria": [
     {
