@@ -61,30 +61,30 @@ h1 .line{display:block;overflow:hidden}
 h1 .line span{display:block}
 .sub{left:calc(var(--u)*69);top:calc(var(--ub)*382);font-weight:350;font-size:calc(var(--ub)*33);line-height:calc(var(--ub)*45);letter-spacing:.025em}
 
-/* Botones */
-.pill{left:calc(var(--u)*67);top:calc(var(--u)*534);width:calc(var(--u)*433);height:calc(var(--u)*88);border-radius:999px;background:var(--cream);color:var(--ink);
-  display:flex;align-items:center;padding-left:calc(var(--u)*47);font-size:calc(var(--u)*33);font-weight:400;letter-spacing:.02em}
-.pill .arrow{position:absolute;left:calc(var(--u)*(429 - 67));top:calc(var(--u)*(518 - 484));width:calc(var(--u)*27);height:calc(var(--u)*20)}
-.link{left:calc(var(--u)*551);top:calc(var(--u)*534);height:calc(var(--u)*88);width:calc(var(--u)*238);font-size:calc(var(--u)*28);font-weight:300;letter-spacing:.01em}
-.link .txt{position:absolute;left:calc(var(--u)*1);top:calc(var(--u)*(517 - 484 - 4.2));line-height:1}
-.link .arrow{position:absolute;left:calc(var(--u)*210);top:calc(var(--u)*(517 - 484));width:calc(var(--u)*28);height:calc(var(--u)*21)}
-.link::after{content:"";position:absolute;left:0;right:0;top:calc(var(--u)*(554 - 484));height:max(1px,calc(var(--u)*1.5));background:rgba(255,255,255,.95)}
-
+/* Botones: dos píldoras del mismo tamaño; "Ver proyectos" transparente con borde blanco */
+.pill,.link{box-sizing:border-box;width:calc(var(--u)*433);height:calc(var(--u)*88);border-radius:999px;display:flex;align-items:center;padding-left:calc(var(--u)*47);font-size:calc(var(--u)*33);font-weight:400;letter-spacing:.02em}
+.pill{background:var(--cream);color:var(--ink)}
+.link{border:1.5px solid rgba(255,255,255,.95);background:transparent;color:#fff;text-shadow:0 1px 10px rgba(0,0,0,.35);transition:background .2s}
+.link:hover{background:rgba(255,255,255,.12)}
+.link .txt{position:static;line-height:1}
+.pill .arrow,.link .arrow{position:absolute;left:calc(var(--u)*(429 - 67));top:calc(var(--u)*(518 - 484));width:calc(var(--u)*27);height:calc(var(--u)*20)}
+/* Celular: lado a lado, centrados en la pantalla */
+.pill,.link{top:calc(var(--u)*534)}
+.pill{left:calc(50vw - var(--u)*(433 + 18))}
+.link{left:calc(50vw + var(--u)*18)}
+/* Pantallas horizontales casi cuadradas: bajo el texto, alineados a la izquierda */
 @media (min-aspect-ratio:1/1){
   .pill,.link{top:calc(var(--ub)*472 + var(--u)*50)}
+  .pill,.link{width:calc(var(--u)*480)}
+  .pill{left:calc(var(--u)*67)}
+  .link{left:calc(var(--u)*(67 + 480 + 36))}
 }
+/* Computador: apilados sobre el cielo, a la altura de la segunda línea del título */
 @media (min-aspect-ratio:3/2){
   .sub{top:calc(var(--ub)*404)}
-  /* Botones apilados, al centro-derecha sobre el cielo, a la altura de la segunda línea del título */
-  .pill,.link{left:55vw;right:auto;width:calc(var(--u)*433);height:calc(var(--u)*88)}
+  .pill,.link{left:55vw;width:calc(var(--u)*480)}
   .pill{top:calc(var(--ub)*286 + (var(--ub)*90 - var(--u)*88) / 2)}
-  .link{top:calc(var(--ub)*286 + (var(--ub)*90 - var(--u)*88) / 2 + var(--u)*(88 + 28));
-    display:flex;align-items:center;padding-left:calc(var(--u)*47);border:1.5px solid rgba(255,255,255,.95);border-radius:999px;background:transparent;
-    font-size:calc(var(--u)*33);font-weight:400;letter-spacing:.02em;text-shadow:0 1px 10px rgba(0,0,0,.35);transition:background .2s}
-  .link:hover{background:rgba(255,255,255,.12)}
-  .link::after{display:none}
-  .link .txt{position:static;line-height:1}
-  .link .arrow{left:calc(var(--u)*(429 - 67));top:calc(var(--u)*(518 - 484));width:calc(var(--u)*27);height:calc(var(--u)*20)}
+  .link{top:calc(var(--ub)*286 + (var(--ub)*90 - var(--u)*88) / 2 + var(--u)*(88 + 28))}
 }
 .arrow{fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;overflow:visible}
 
