@@ -2,5 +2,13 @@
   "nombre": "Casa Naltagua",
   "visible": true,
   "orden": 8,
-  "categoria": "Casas"
+  "categoria": "Casas",
+  "ubicacion": "Isla de Maipo, Región Metropolitana",
+  "anio": "2025",
+  "superficie": 350,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Estructura Metalica y Paneles SIP revestidos en fibrocemento ranurado",
+  "renders": false,
+  "portada": "/media/proyectos/1-1.jpg"
 }
