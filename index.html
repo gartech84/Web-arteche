@@ -18,6 +18,11 @@
   color-scheme: light;
 }
 @supports (height:100svh){ :root{ --u:calc(min(100vw, 66.667svh) / 1024); } }
+/* Computador (pantalla horizontal): la escala se toma del alto de la pantalla, para que los textos no queden chicos */
+@media (min-aspect-ratio:1/1){
+  :root{ --u:calc(min(100vw, 100vh, 1126px) / 1024); }
+  @supports (height:100svh){ :root{ --u:calc(min(100vw, 100svh, 1126px) / 1024); } }
+}
 *{box-sizing:border-box}
 html,body{margin:0;height:100%;overflow:hidden}
 body{background:#44617E;color:var(--white);font-family:var(--font);-webkit-font-smoothing:antialiased}
