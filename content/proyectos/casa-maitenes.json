@@ -1,0 +1,44 @@
+{
+  "nombre": "Casa Maitenes",
+  "visible": true,
+  "orden": 5,
+  "categoria": "Casas",
+  "ubicacion": "Maitencillo, V Región",
+  "anio": "2026",
+  "superficie": 215,
+  "pisos": 1,
+  "estado": "En proyecto",
+  "materialidad": "Paneles SIP revestidos en WPC",
+  "programa": [
+    "8 Dormitorios",
+    "6 Baños",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Hall de Acceso"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/03-modificado-2.png",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/01-modificado.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/02-modificado4.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/living-01-editado.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/living-02-editado.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
+}
