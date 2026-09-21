@@ -1,6 +1,68 @@
 {
   "nombre": "Casa Cárdenas",
   "visible": true,
-  "orden": 4,
-  "categoria": "Casas"
+  "orden": 9,
+  "categoria": "Casas",
+  "ubicacion": "Santo Domingo, V Región",
+  "anio": "2024",
+  "superficie": 280,
+  "pisos": 2,
+  "estado": "En proyecto",
+  "materialidad": "Estructura en hormigón, terminación a hormigón a la vista y detalles en madera.",
+  "programa": [
+    "5 Dormitorios",
+    "Oficina",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Quincho",
+    "Estar",
+    "Logia",
+    "Hall de Acceso",
+    "6 Baños"
+  ],
+  "renders": true,
+  "portada": "/media/proyectos/sur-2.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/acceso-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/quincho-1.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/oriente.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/cierre-perimetral.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/fachada-poniente.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/quincho.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/cocina.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/oriente-3.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
