@@ -109,4 +109,65 @@ const idx = fs.readFileSync('templates/proyectos.html', 'utf8')
   .replace('%%CARDS%%', cards.trimEnd()).replace('%%COUNT%%', `${proyectos.length} proyectos`).replace('%%OGIMG%%', og);
 fs.writeFileSync(path.join(OUT, 'proyectos.html'), idx);
 
+
+// 6) SEO: dirección canónica, vista previa al compartir, datos estructurados, sitemap y robots.
+//    Mientras la web esté en la dirección de prueba, todas las páginas llevan "noindex" para que Google no las indexe.
+//    Al migrar el dominio, en Cloudflare (Settings → Build → Variables) agrega INDEXAR = si.
+const INDEXAR = String(process.env.INDEXAR || '').toLowerCase() === 'si';
+const SITE = (process.env.SITE_URL || (INDEXAR ? 'https://artechearquitecto.com' : 'https://web-arteche.garteche.workers.dev')).replace(/\/$/, '');
+const abs = u => /^https?:/.test(u) ? u : `${SITE}/${u.replace(/^\//, '')}`;
+const urlDe = f => f === 'index.html' ? `${SITE}/` : `${SITE}/${f.replace(/\.html$/, '')}`;
+const ESTUDIO = {
+  '@type': 'ProfessionalService', '@id': `${SITE}/#estudio`,
+  name: 'Gonzalo Arteche Arquitecto', url: `${SITE}/`,
+  description: 'Estudio de arquitectura en Santiago. Diseño y dirección de obra de viviendas y espacios comerciales en todo Chile.',
+  logo: abs('apple-touch-icon.png'), image: abs('img/portada.jpg'),
+  telephone: '+56992511880', email: 'contacto@artechearquitecto.com', foundingDate: '2016',
+  address: { '@type': 'PostalAddress', addressLocality: 'Santiago', addressRegion: 'Región Metropolitana', addressCountry: 'CL' },
+  areaServed: { '@type': 'Country', name: 'Chile' },
+  founder: { '@id': `${SITE}/estudio#gonzalo` },
+  sameAs: ['https://www.instagram.com/gonzalo_arteche_arquitecto/', 'https://www.linkedin.com/in/gonzalo-arteche-rautenberg-1939b4167/', 'https://www.facebook.com/profile.php?id=100065340315698']
+};
+const PERSONA = {
+  '@type': 'Person', '@id': `${SITE}/estudio#gonzalo`, name: 'Gonzalo Arteche Rautenberg',
+  jobTitle: 'Arquitecto fundador y director', image: abs('img/gonzalo-arteche.jpg'),
+  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad del Desarrollo' },
+  worksFor: { '@id': `${SITE}/#estudio` }
+};
+const miga = items => ({ '@type': 'BreadcrumbList', itemListElement: items.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: u })) });
+const hoy = new Date().toISOString().slice(0, 10);
+const enSitemap = [];
+for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
+  let h = fs.readFileSync(path.join(OUT, f), 'utf8');
+  const url = urlDe(f), es404 = f === '404.html';
+  const titulo = (h.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
+  const grafo = [];
+  if (f === 'index.html') grafo.push(ESTUDIO);
+  else if (f === 'estudio.html') grafo.push(PERSONA, miga([['Inicio', `${SITE}/`], ['Estudio', url]]));
+  else if (f === 'proyectos.html') grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', url]]));
+  else if (!es404 && !['metodologia.html', 'contacto.html'].includes(f)) {
+    const nombre = titulo.split(' | ')[0];
+    grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [nombre, url]]),
+      { '@type': 'CreativeWork', name: nombre, url, creator: { '@id': `${SITE}/#estudio` }, image: abs((h.match(/property="og:image" content="([^"]+)"/) || [])[1] || 'img/portada.jpg') });
+  } else if (!es404) grafo.push(miga([['Inicio', `${SITE}/`], [titulo.split(' | ')[0], url]]));
+  const extra = [
+    es404 || !INDEXAR ? '<meta name="robots" content="noindex, nofollow">' : '',
+    es404 ? '' : `<link rel="canonical" href="${url}">`,
+    es404 ? '' : `<meta property="og:url" content="${url}">`,
+    '<meta property="og:site_name" content="Gonzalo Arteche Arquitecto">',
+    '<meta property="og:locale" content="es_CL">',
+    grafo.length ? `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': grafo })}</script>` : ''
+  ].filter(Boolean).join('\n');
+  h = h.replace(/<html lang="es">/, '<html lang="es-CL">')
+       .replace(/(<meta property="og:image" content=")([^"]+)(")/, (m, a, u, b) => a + abs(u) + b)
+       .replace('</head>', extra + '\n</head>');
+  fs.writeFileSync(path.join(OUT, f), h);
+  if (!es404) enSitemap.push(url);
+}
+const orden = u => u === `${SITE}/` ? 0 : /estudio|metodologia|proyectos$|contacto/.test(u) ? 1 : 2;
+enSitemap.sort((a, b) => orden(a) - orden(b) || a.localeCompare(b));
+fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${enSitemap.map(u => `  <url><loc>${u}</loc><lastmod>${hoy}</lastmod></url>`).join('\n')}\n</urlset>\n`);
+fs.writeFileSync(path.join(OUT, 'robots.txt'), INDEXAR ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n` : `User-agent: *\nAllow: /\n`);
+console.log(INDEXAR ? `SEO: indexación activada para ${SITE}` : 'SEO: modo prueba (noindex en todas las páginas)');
+
 console.log(`Listo: ${proyectos.length} proyectos en la grilla, ${proyectos.filter(p => p.pagina).length} con ficha propia.`);
