@@ -21,7 +21,7 @@
     "Despensa",
     "Walk-in closet principal"
   ],
-  "renders": true,
+  "renders": false,
   "portada": "/media/proyectos/casa-campo-viejo/portada.jpg",
   "galeria": [
     {
