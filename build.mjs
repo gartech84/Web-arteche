@@ -114,7 +114,7 @@ fs.writeFileSync(path.join(OUT, 'proyectos.html'), idx);
 //    Mientras la web esté en la dirección de prueba, todas las páginas llevan "noindex" para que Google no las indexe.
 //    Al migrar el dominio, en Cloudflare (Settings → Build → Variables) agrega INDEXAR = si.
 const INDEXAR = String(process.env.INDEXAR || '').toLowerCase() === 'si';
-const SITE = (process.env.SITE_URL || (INDEXAR ? 'https://artechearquitecto.com' : 'https://web-arteche.garteche.workers.dev')).replace(/\/$/, '');
+const SITE = (process.env.SITE_URL || (INDEXAR ? 'https://www.artechearquitecto.com' : 'https://web-arteche.garteche.workers.dev')).replace(/\/$/, '');
 const abs = u => /^https?:/.test(u) ? u : `${SITE}/${u.replace(/^\//, '')}`;
 const urlDe = f => f === 'index.html' ? `${SITE}/` : `${SITE}/${f.replace(/\.html$/, '')}`;
 const ESTUDIO = {
@@ -156,6 +156,8 @@ for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
     es404 ? '' : `<meta property="og:url" content="${url}">`,
     '<meta property="og:site_name" content="Gonzalo Arteche Arquitecto">',
     '<meta property="og:locale" content="es_CL">',
+    // verificaciones de Google Search Console y Bing que ya existen en la web de Wix (se conservan para no perder la propiedad)
+    f === 'index.html' ? '<meta name="google-site-verification" content="GTVVJ7urzYtj6Cm124R0wgxU_8tfCx6vz02msXK0CrY">\n<meta name="msvalidate.01" content="1471E17AC517092A185DE774794541C9">' : '',
     grafo.length ? `<script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': grafo })}</script>` : ''
   ].filter(Boolean).join('\n');
   h = h.replace(/<html lang="es">/, '<html lang="es-CL">')
