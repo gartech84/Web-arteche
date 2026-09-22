@@ -2,5 +2,12 @@
   "nombre": "Oficinas Simpli Latam",
   "visible": true,
   "orden": 10,
-  "categoria": "Comercial"
+  "categoria": "Comercial",
+  "ubicacion": "Las Condes, Región Metropolitana",
+  "anio": "2024",
+  "pisos": -1,
+  "estado": "Construido",
+  "materialidad": "Proyecto de Interiorismo",
+  "renders": false,
+  "portada": "/media/proyectos/2-1.jpg"
 }
