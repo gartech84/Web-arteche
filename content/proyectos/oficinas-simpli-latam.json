@@ -30,6 +30,11 @@
       "foto": "/media/proyectos/5.jpg",
       "formato": "Horizontal",
       "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/2-2.jpg",
+      "formato": "Vertical",
+      "encuadre": "Centro"
     }
   ]
 }
