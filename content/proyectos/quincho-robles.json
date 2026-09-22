@@ -11,9 +11,11 @@
   "programa": [
     "Quincho",
     "Comedor",
-    "Living"
+    "Living",
+    "Barra",
+    "Mueble refrigerador"
   ],
-  "encargo": "Quincho con sectores de comedor, barra y living. Un espacio multifuncional, que pueda albergar todo tipo de eventos.",
+  "encargo": "Quincho con sectores de comedor, barra y living. Un espacio multifuncional, que pueda albergar todo tipo de eventos, desde un almuerzo familiar, hasta una fiesta de empresa.",
   "renders": false,
   "portada": "/media/proyectos/dscf1293-hdr.jpg",
   "galeria": [
