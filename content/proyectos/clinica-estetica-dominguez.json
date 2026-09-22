@@ -24,5 +24,67 @@
     "Cocina de Personal"
   ],
   "renders": false,
-  "portada": "/media/proyectos/hall-4.jpg"
+  "portada": "/media/proyectos/hall-4.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/hall-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-5.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-6.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/1-4.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/3-3.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/7-1.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/8-1.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-9.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-10.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-11.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-12.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/hall-112.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
