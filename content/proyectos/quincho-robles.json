@@ -2,5 +2,80 @@
   "nombre": "Quincho Robles",
   "visible": true,
   "orden": 14,
-  "categoria": "Quinchos y remodelaciones"
+  "categoria": "Quinchos y remodelaciones",
+  "ubicacion": "Lo Barnechea, Región Metropolitana",
+  "anio": "2022",
+  "superficie": 60,
+  "pisos": 1,
+  "estado": "Construido",
+  "programa": [
+    "Quincho",
+    "Comedor",
+    "Living"
+  ],
+  "encargo": "Quincho con sectores de comedor, barra y living. Un espacio multifuncional, que pueda albergar todo tipo de eventos.",
+  "renders": false,
+  "portada": "/media/proyectos/dscf1293-hdr.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/dscf1212-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1224-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1236-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1239-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1242-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1245-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1266-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1269-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1299-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1275-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1305-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/dscf1317-hdr.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
