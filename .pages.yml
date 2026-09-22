@@ -64,6 +64,10 @@ content:
         description: "Un recinto por línea. Ej: 4 dormitorios"
         type: string
         list: true
+      - name: encargo
+        label: Encargo
+        description: "Aparece bajo el Programa en la ficha del proyecto. Máximo 80 palabras."
+        type: text
       - name: renders
         label: Las imágenes son renders
         description: "Muestra la nota «Imágenes: renders del proyecto»."
