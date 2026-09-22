@@ -15,6 +15,21 @@
       "foto": "/media/proyectos/1-2.jpg",
       "formato": "Horizontal",
       "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/3-1.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/4-1.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/5.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
     }
   ]
 }
