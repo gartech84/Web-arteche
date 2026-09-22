@@ -2,5 +2,60 @@
   "nombre": "Quincho Restrepo",
   "visible": true,
   "orden": 13,
-  "categoria": "Quinchos y remodelaciones"
+  "categoria": "Quinchos y remodelaciones",
+  "ubicacion": "Lo Barnechea, Región Metropolitana",
+  "anio": "2022",
+  "superficie": 80,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Hormigón a la vista.",
+  "renders": false,
+  "portada": "/media/proyectos/04-1.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/07-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/01-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/02-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/03-3.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/05-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/06-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/08-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/09.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/10-1.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
