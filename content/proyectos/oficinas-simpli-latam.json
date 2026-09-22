@@ -9,5 +9,12 @@
   "estado": "Construido",
   "materialidad": "Proyecto de Interiorismo",
   "renders": false,
-  "portada": "/media/proyectos/2-1.jpg"
+  "portada": "/media/proyectos/2-1.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/1-2.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    }
+  ]
 }
