@@ -2,5 +2,29 @@
   "nombre": "Quincho Laguna",
   "visible": true,
   "orden": 15,
-  "categoria": "Quinchos y remodelaciones"
+  "categoria": "Quinchos y remodelaciones",
+  "ubicacion": "Lo Barnechea, Región Metropolitana",
+  "anio": "2023",
+  "superficie": 50,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Estructura metálica revestido en madera.",
+  "programa": [
+    "Quincho",
+    "Comedor",
+    "Barra",
+    "Living",
+    "Mueble refrigerador",
+    "Baño"
+  ],
+  "encargo": "Quincho con sectores de comedor, barra y living. Un espacio multifuncional, que pueda albergar todo tipo de eventos, desde un almuerzo familiar, hasta una fiesta de empresa.",
+  "renders": false,
+  "portada": "/media/proyectos/01-3.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/3-4.jpg",
+      "formato": "Horizontal",
+      "encuadre": "Centro"
+    }
+  ]
 }
