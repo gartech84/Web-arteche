@@ -199,6 +199,20 @@ const orden = u => u === `${SITE}/` ? 0 : /estudio|metodologia|proyectos$|contac
 enSitemap.sort((a, b) => orden(a) - orden(b) || a.localeCompare(b));
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${enSitemap.map(u => `  <url><loc>${u}</loc><lastmod>${hoy}</lastmod></url>`).join('\n')}\n</urlset>\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'), INDEXAR ? `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n` : `User-agent: *\nAllow: /\n`);
+
+// Cloudflare Web Analytics: mide visitas sin cookies. El token se agrega en Cloudflare
+// (Settings → Build → Variables → CF_ANALYTICS_TOKEN); si no está, no se agrega nada.
+const CF_TOKEN = process.env.CF_ANALYTICS_TOKEN;
+if (CF_TOKEN) {
+  const beacon = `<script defer src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "${CF_TOKEN}"}'></script>\n`;
+  for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
+    const p = path.join(OUT, f);
+    fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('</body>', beacon + '</body>'));
+  }
+  console.log('Cloudflare Web Analytics: activado.');
+} else {
+  console.log('Cloudflare Web Analytics: sin token todavía (agrega CF_ANALYTICS_TOKEN en Cloudflare cuando lo tengas).');
+}
 console.log(INDEXAR ? `SEO: indexación activada para ${SITE}` : 'SEO: modo prueba (noindex en todas las páginas)');
 
 console.log(`Listo: ${proyectos.length} proyectos en la grilla, ${proyectos.filter(p => p.pagina).length} con ficha propia.`);
