@@ -68,6 +68,9 @@ for (const p of proyectos) {
   const ficha = datos.map(([k, v]) => `<div class="dato"><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
   const programa = (p.programa || []).filter(Boolean).map(r => `<li>${esc(r)}</li>`).join('');
   const nota = p.renders ? '<p class="nota">Imágenes: renders del proyecto.</p>' : '';
+  const encargo = (p.encargo || '').trim()
+    ? `<div class="encargo"><h2 class="label">Encargo</h2>${p.encargo.trim().split(/\n\s*\n/).map(t => `<p>${esc(t.trim())}</p>`).join('')}</div>`
+    : '';
   let gal = '';
   for (const [i, g] of galeria.entries()) {
     const f = await photo(g.foto); if (!f) continue;
@@ -79,9 +82,11 @@ for (const p of proyectos) {
     gal += `<li class="g-item g-${forma}"><button type="button" class="g-btn" data-i="${i}" aria-label="Ampliar imagen ${i + 1}: ${alt}"><img src="${f.sm}"${srcset} data-full="${f.lg}" alt="${alt}" loading="lazy" style="object-position:${pos}"></button></li>`;
   }
   const port = await photo(p.portada || galeria[0]?.foto);
-  const desc = [p.nombre, [CAT1[p.categoria] ? CAT1[p.categoria].toLowerCase() : '', p.ubicacion ? `en ${p.ubicacion}` : ''].filter(Boolean).join(' '), p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(', ') + '. Proyecto de Gonzalo Arteche Arquitecto.';
+  const descAuto = [p.nombre, [CAT1[p.categoria] ? CAT1[p.categoria].toLowerCase() : '', p.ubicacion ? `en ${p.ubicacion}` : ''].filter(Boolean).join(' '), p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(', ') + '. Proyecto de Gonzalo Arteche Arquitecto.';
+  const resumen = (p.encargo || '').trim().replace(/\s+/g, ' ');
+  const desc = resumen ? (resumen.length > 158 ? resumen.slice(0, 155).replace(/[\s,.;:]+\S*$/, '') + '…' : resumen) : descAuto;
   const html = tplP.replaceAll('%%NOMBRE%%', esc(p.nombre)).replaceAll('%%DESC%%', esc(desc)).replace('%%OGIMG%%', port ? port.lg : 'img/portada.jpg')
-    .replace('%%FICHA%%', ficha).replace('%%PROGRAMA%%', programa).replace('%%NOTA%%', nota).replace('%%GALERIA%%', gal);
+    .replace('%%FICHA%%', ficha).replace('%%PROGRAMA%%', programa).replace('%%NOTA%%', nota).replace('%%ENCARGO%%', encargo).replace('%%GALERIA%%', gal);
   fs.writeFileSync(path.join(OUT, p.pagina), html);
 }
 
