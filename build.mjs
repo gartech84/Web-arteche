@@ -110,13 +110,42 @@ const idx = fs.readFileSync('templates/proyectos.html', 'utf8')
 fs.writeFileSync(path.join(OUT, 'proyectos.html'), idx);
 
 
+// 5c) Redirecciones desde las direcciones antiguas de Wix
+const redir = [
+  ['/faq', '/metodologia'], ['/service-page/consultation-session', '/contacto'],
+  ['/portfolio', '/proyectos'], ['/residenciales', '/proyectos'], ['/comerciales', '/proyectos'],
+  ['/vertientes', '/casa-las-vertientes'], ['/casapolo', '/proyectos'], ['/oficinaschulze', '/proyectos'],
+  ['/casanaltagua', '/proyectos'], ['/simpli', '/proyectos'],
+  ['/portfolio-collections/my-portfolio/proyecto-sin-título-2efb57', '/casa-campo-viejo'],
+  ['/portfolio-collections/my-portfolio/proyecto-sin-título', '/casa-el-arrayan'],
+  ['/portfolio-collections/my-portfolio/modern-living-spaces', '/casa-las-vertientes'],
+  // El blog no se migra: sus 7 entradas y la portada del blog se redirigen a Contacto
+  ['/blog', '/contacto'],
+  ['/post/todos-me-preguntan-cuánto-cuesta-construir-una-casa-en-chile-aquí-te-dejo-una-guía-breve-y-realis', '/contacto'],
+  ['/post/todos-me-preguntan-cuánto-cuesta-construir-una-casa-en-chile-aquí-te-dejo-una-guáa-breve-y-realis', '/contacto'],
+  ['/post/todos-me-preguntan-cuánto-cuesta-construir-una-casa-en-chile-aquí-te-dejo-una-guáia-breve-y-realis', '/contacto'],
+  ['/post/qué-son-los-proyectos-de-especialidades', '/contacto'],
+  ['/post/cómo-es-el-desarrollo-de-un-proyecto-de-arquitectura-aquí-te-detallo-nuestra-metodología', '/contacto'],
+  ['/post/cómo-integrar-el-levantamiento-topográfico-en-tu-proyecto-arquitectónico', '/contacto'],
+  ['/post/paneles-sip-y-fachadas-ventiladas-de-madera-una-combinación-sostenible-y-eficiente', '/contacto'],
+  ['/post/dondeconstruirlacasasoñada', '/contacto'],
+  ['/post/cómo-elegir-un-estudio-de-arquitectura-en-chile', '/contacto']
+];
+const lineas = [];
+for (const [de, a] of redir) {
+  lineas.push(`${encodeURI(de)} ${encodeURI(a)} 301`);
+  if (encodeURI(de) !== de) lineas.push(`${de} ${encodeURI(a)} 301`);
+}
+lineas.push('/portfolio-collections/* /proyectos 301');
+fs.writeFileSync(path.join(OUT, '_redirects'), lineas.join('\n') + '\n');
+
 // 6) SEO: dirección canónica, vista previa al compartir, datos estructurados, sitemap y robots.
 //    Mientras la web esté en la dirección de prueba, todas las páginas llevan "noindex" para que Google no las indexe.
 //    Al migrar el dominio, en Cloudflare (Settings → Build → Variables) agrega INDEXAR = si.
 const INDEXAR = String(process.env.INDEXAR || '').toLowerCase() === 'si';
 const SITE = (process.env.SITE_URL || (INDEXAR ? 'https://www.artechearquitecto.com' : 'https://web-arteche.garteche.workers.dev')).replace(/\/$/, '');
 const abs = u => /^https?:/.test(u) ? u : `${SITE}/${u.replace(/^\//, '')}`;
-const urlDe = f => f === 'index.html' ? `${SITE}/` : `${SITE}/${f.replace(/\.html$/, '')}`;
+const urlDe = f => f === 'index.html' ? `${SITE}/` : `${SITE}/${encodeURI(f.replace(/\.html$/, ''))}`;
 const ESTUDIO = {
   '@type': 'ProfessionalService', '@id': `${SITE}/#estudio`,
   name: 'Gonzalo Arteche Arquitecto', url: `${SITE}/`,

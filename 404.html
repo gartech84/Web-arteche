@@ -295,6 +295,15 @@ img{display:block;max-width:100%}
 .step.on .step-dot{background:var(--navy);border-color:var(--navy)}
 
 .icons svg .fillp{fill:#fff;stroke:none}
+
+/* Remate de la línea: círculo con check, del tamaño de los puntos de fase */
+.flow-track{bottom:calc(var(--rail) / 2)}
+.flow-end{position:relative;height:var(--rail);margin-top:clamp(28px,3vw,44px)}
+.end-dot{position:absolute;left:var(--x);top:50%;width:var(--rail);height:var(--rail);margin:calc(var(--rail) / -2) 0 0 calc(var(--rail) / -2);border-radius:50%;background:var(--cream);border:1px solid var(--navy);display:flex;align-items:center;justify-content:center;transition:background .5s}
+.end-dot svg{width:62%;height:62%;fill:none;stroke:var(--navy);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:stroke .5s}
+.flow-end.on .end-dot{background:var(--navy)}
+.flow-end.on .end-dot svg{stroke:#fff}
+
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -411,14 +420,14 @@ img{display:block;max-width:100%}
 /* Diagrama de proceso: la línea se completa y los puntos se encienden al avanzar */
 (function(){
   var flow=document.getElementById('flow'); if(!flow) return;
-  var fill=flow.querySelector('.flow-fill'), nodes=flow.querySelectorAll('.phase,.step');
+  var fill=flow.querySelector('.flow-fill'), nodes=flow.querySelectorAll('.phase,.step,.flow-end');
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   function update(){
     var r=flow.getBoundingClientRect(), vh=window.innerHeight, mark=vh*0.6;
     var p=Math.min(1,Math.max(0,(mark-r.top)/r.height));
     fill.style.setProperty('--p', reduce?1:p);
     nodes.forEach(function(n){
-      var d=n.querySelector(':scope > .phase-head .phase-dot, :scope > .step-dot'); if(!d) return;
+      var d=n.querySelector(':scope > .phase-head .phase-dot, :scope > .step-dot, :scope > .end-dot'); if(!d) return;
       n.classList.toggle('on', reduce || d.getBoundingClientRect().top < mark);
     });
   }
