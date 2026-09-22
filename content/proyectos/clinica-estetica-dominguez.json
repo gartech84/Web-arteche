@@ -2,5 +2,27 @@
   "nombre": "Clínica Estética Domínguez",
   "visible": true,
   "orden": 12,
-  "categoria": "Comercial"
+  "categoria": "Comercial",
+  "ubicacion": "Las Condes, Región Metropolitana",
+  "anio": "2024",
+  "superficie": 240,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Habilitación completa de clínica estética",
+  "programa": [
+    "Recepción",
+    "1 Consulta Cirujano",
+    "1 Oficina",
+    "3 Salas de Procedimiento",
+    "Baño de Pacientes",
+    "Camarin de Paciente",
+    "Sala de Fotografias",
+    "Camarines de Personal",
+    "2 Bodegas",
+    "Pabellón de Cirugía",
+    "Sala de Esterilización",
+    "Cocina de Personal"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/hall-4.jpg"
 }
