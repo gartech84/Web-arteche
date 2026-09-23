@@ -1,6 +1,7 @@
 {
   "nombre": "Remodelación Moreno",
-  "visible": true,
+  "visible": false,
   "orden": 16,
-  "categoria": "Quinchos y remodelaciones"
+  "categoria": "Quinchos y remodelaciones",
+  "renders": false
 }
