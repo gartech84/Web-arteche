@@ -1,6 +1,7 @@
 {
   "nombre": "Remodelación Gebauer",
-  "visible": true,
+  "visible": false,
   "orden": 17,
-  "categoria": "Quinchos y remodelaciones"
+  "categoria": "Quinchos y remodelaciones",
+  "renders": false
 }
