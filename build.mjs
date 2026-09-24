@@ -43,6 +43,27 @@ async function photo(url) {
   done.set(url, r); return r;
 }
 
+// Recorte exacto (misma proporción que el marco donde se muestra), para que fotos
+// panorámicas o verticales no se vean pixeladas al llenar un marco de otra forma.
+const doneC = new Map();
+async function crop(url, sizes) { // sizes: [[ancho, alto], ...] de menor a mayor
+  if (!url) return null;
+  const key = url + JSON.stringify(sizes);
+  if (doneC.has(key)) return doneC.get(key);
+  const base = await photo(url);
+  if (!base || !sharp) { doneC.set(key, base && { src: base.lg, srcset: '' }); return doneC.get(key); }
+  const rel = url.replace(/^\//, '');
+  const dir = path.dirname(rel), name = path.basename(rel, path.extname(rel));
+  const out = [];
+  for (const [w, h] of sizes) {
+    const f = `${dir}/${name}-${w}x${h}.jpg`;
+    await sharp(rel).rotate().resize({ width: w, height: h, fit: 'cover', position: 'centre' }).flatten({ background: '#ffffff' }).jpeg({ quality: 80, mozjpeg: true }).toFile(path.join(OUT, f));
+    out.push(`${f} ${w}w`);
+  }
+  const r = { src: out[0].split(' ')[0], srcset: ` srcset="${out.join(', ')}"` };
+  doneC.set(key, r); return r;
+}
+
 // 3) Leer fichas
 const CAT1 = { 'Casas': 'Casa', 'Comercial': 'Comercial', 'Quinchos y remodelaciones': 'Quincho o remodelación' };
 const FORM = { 'Cuadrada': 'sq', 'Vertical': 'tall', 'Horizontal': 'wide', 'Panorámica': 'pano' };
@@ -84,7 +105,8 @@ for (const p of proyectos) {
     gal += `<li class="g-item g-${forma}"><button type="button" class="g-btn" data-i="${i}" aria-label="Ampliar imagen ${i + 1}: ${alt}"><img src="${f.sm}"${srcset} data-full="${f.lg}" alt="${alt}" loading="lazy" style="object-position:${pos}"></button></li>`;
   }
   const port = await photo(p.portada || galeria[0]?.foto);
-  const fotoHtml = port ? `<figure class="p-foto"><img src="${port.lg}"${port.sm !== port.lg ? ` srcset="${port.sm} 900w, ${port.lg} 2000w" sizes="(min-width:900px) 50vw, 100vw"` : ''} alt="${esc(p.nombre)}" fetchpriority="high"></figure>` : '';
+  const sq = await crop(portSrc, [[800, 800], [1400, 1400]]);
+  const fotoHtml = sq ? `<figure class="p-foto"><img src="${sq.src}"${sq.srcset} sizes="(min-width:900px) 50vw, 100vw" alt="${esc(p.nombre)}" fetchpriority="high"></figure>` : '';
   const tplUse = programa ? tplP : tplP.replace(/\s*<h2 class="label">Programa<\/h2>\s*<ul class="recintos">%%PROGRAMA%%<\/ul>/, '');
   const descAuto = [p.nombre, [CAT1[p.categoria] ? CAT1[p.categoria].toLowerCase() : '', p.ubicacion ? `en ${p.ubicacion}` : ''].filter(Boolean).join(' '), p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(', ') + '. Proyecto de Gonzalo Arteche Arquitecto.';
   const resumen = (p.encargo || '').trim().replace(/\s+/g, ' ');
@@ -100,7 +122,8 @@ for (const p of proyectos) {
   const port = await photo(p.portada || (p.galeria || [])[0]?.foto);
   const meta = [p.ubicacion, p.anio, p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(' · ');
   const badge = p.estado && p.estado !== 'Construido' ? `<span class="badge">${esc(p.estado)}</span>` : '';
-  const media = port ? `<img src="${port.sm}"${port.sm !== port.lg ? ` srcset="${port.sm} 900w, ${port.lg} 2000w" sizes="(min-width:1100px) 31vw, (min-width:620px) 47vw, 94vw"` : ''} alt="${esc(p.nombre)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
+  const th = await crop(p.portada || (p.galeria || [])[0]?.foto, [[640, 800], [1120, 1400]]);
+  const media = th ? `<img src="${th.src}"${th.srcset} sizes="(min-width:1100px) 31vw, (min-width:620px) 47vw, 94vw" alt="${esc(p.nombre)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
   const open = p.pagina ? `<a href="${p.pagina}">` : '<a>';
   cards += `        <li class="card" data-cat="${esc(p.categoria)}">
           ${open}
