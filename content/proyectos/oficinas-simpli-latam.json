@@ -13,27 +13,27 @@
   "galeria": [
     {
       "foto": "/media/proyectos/1-2.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
       "foto": "/media/proyectos/3-1.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
       "foto": "/media/proyectos/4-1.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
       "foto": "/media/proyectos/5.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
       "foto": "/media/proyectos/2-2.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     }
   ]
