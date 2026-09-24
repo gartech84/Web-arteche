@@ -37,31 +37,31 @@
     },
     {
       "foto": "/media/proyectos/casa-el-arrayan/posterior.jpg",
-      "formato": "Horizontal",
-      "encuadre": "Abajo",
+      "formato": "Cuadrada",
+      "encuadre": "Centro",
       "descripcion": "Fachada posterior hacia el jardín"
     },
     {
       "foto": "/media/proyectos/casa-el-arrayan/living.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Living con escalera de peldaños volados"
     },
     {
       "foto": "/media/proyectos/casa-el-arrayan/comedor.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Comedor en desnivel junto al living"
     },
     {
       "foto": "/media/proyectos/casa-el-arrayan/escalera.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Escalera y living con vista al jardín"
     },
     {
       "foto": "/media/proyectos/casa-el-arrayan/pasillo.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Pasillo de dormitorios"
     },
