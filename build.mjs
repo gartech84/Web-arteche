@@ -138,7 +138,7 @@ for (const p of proyectos) {
 const primera = proyectos.find(p => p.portada);
 const og = primera ? (await photo(primera.portada)).lg : 'img/portada.jpg';
 const idx = fs.readFileSync('templates/proyectos.html', 'utf8')
-  .replace('%%CARDS%%', cards.trimEnd()).replace('%%COUNT%%', `${proyectos.length} proyectos`).replace('%%OGIMG%%', og);
+  .replace('%%CARDS%%', cards.trimEnd()).replace('%%COUNT%%', `${proyectos.length} ${proyectos.length === 1 ? 'proyecto seleccionado' : 'proyectos seleccionados'}`).replace('%%OGIMG%%', og);
 fs.writeFileSync(path.join(OUT, 'proyectos.html'), idx);
 
 
