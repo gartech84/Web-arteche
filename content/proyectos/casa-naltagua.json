@@ -9,6 +9,20 @@
   "pisos": 1,
   "estado": "Construido",
   "materialidad": "Estructura Metalica y Paneles SIP revestidos en fibrocemento ranurado",
+  "programa": [
+    "5 Dormitorios",
+    "5 Baños",
+    "Estar",
+    "Oficina",
+    "Hall Acceso",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Logia",
+    "Despensa",
+    "Quincho",
+    "Patio de Servicio"
+  ],
   "renders": false,
   "portada": "/media/proyectos/1-gigapixel-standard-scale-200x.jpg",
   "galeria": [
