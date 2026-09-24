@@ -1,7 +1,19 @@
 {
   "nombre": "Remodelación Moreno",
-  "visible": false,
+  "visible": true,
   "orden": 16,
   "categoria": "Quinchos y remodelaciones",
-  "renders": false
+  "ubicacion": "Temuco, IX Región",
+  "anio": "2024",
+  "superficie": 30,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Remodelación Integral de Cocina y Logia. Muebles lacados y cubiertas de cuarzo.",
+  "programa": [
+    "Cocina",
+    "Comedor de Diario",
+    "Logia"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/1-5.jpg"
 }
