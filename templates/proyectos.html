@@ -423,7 +423,7 @@ img{display:block;max-width:100%}
   function apply(f){
     var n=0;
     cards.forEach(function(c){ var ok = f==='Todos' || c.getAttribute('data-cat')===f; c.hidden=!ok; if(ok) n++; });
-    count.textContent = n + (n===1?' proyecto':' proyectos');
+    count.textContent = n + (n===1?' proyecto seleccionado':' proyectos seleccionados');
     chips.forEach(function(ch){ var on=ch.getAttribute('data-f')===f; ch.classList.toggle('on',on); ch.setAttribute('aria-pressed',on); });
   }
   chips.forEach(function(ch){ ch.addEventListener('click',function(){ apply(ch.getAttribute('data-f')); }); });
