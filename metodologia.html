@@ -302,6 +302,12 @@ img{display:block;max-width:100%}
 .step-last.on .step-dot{background:var(--navy);border-color:var(--navy)}
 .step-last.on .step-dot svg{stroke:#fff}
 
+/* Llamado final: "Ver proyectos" como píldora de contorno blanco, igual que en la portada; ambos botones del mismo ancho */
+.cta .actions{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:fit-content;gap:clamp(12px,1.4vw,20px)}
+.cta .pill{justify-content:space-between}
+.pill-line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.95)}
+.pill-line:hover{background:rgba(255,255,255,.12)}
+@media (max-width:639px){ .cta .actions{grid-auto-flow:row} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -406,7 +412,7 @@ img{display:block;max-width:100%}
       <div class="actions">
         <a class="pill" href="contacto.html">Hablemos de tu proyecto<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg></a>
         <!-- Cambia el href cuando exista la página de proyectos -->
-        <a class="link" href="proyectos.html">Ver proyectos<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg></a>
+        <a class="pill pill-line" href="proyectos.html">Ver proyectos<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg></a>
       </div>
     </div>
   </section>
