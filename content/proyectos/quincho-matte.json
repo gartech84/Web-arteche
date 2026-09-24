@@ -1,6 +1,6 @@
 {
   "nombre": "Quincho Matte",
-  "visible": false,
+  "visible": true,
   "orden": 19,
   "categoria": "Quinchos y remodelaciones",
   "ubicacion": "La Reina, Región Metropolitana",
@@ -9,5 +9,45 @@
   "pisos": 1,
   "estado": "Construido",
   "materialidad": "Estructura Metálica, muros de hormigón a la vista. Pérgola bioclimática.",
-  "renders": false
+  "programa": [
+    "Quincho",
+    "Zona de Estar",
+    "Jardinera",
+    "Horno de Pizza",
+    "Pérgola Bioclimática"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/3-7.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/1-6.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/2-5.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/4-5.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/5-4.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/6-3.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/7-4.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
