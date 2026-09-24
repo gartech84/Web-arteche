@@ -1,0 +1,13 @@
+{
+  "nombre": "Quincho Matte",
+  "visible": false,
+  "orden": 19,
+  "categoria": "Quinchos y remodelaciones",
+  "ubicacion": "La Reina, Región Metropolitana",
+  "anio": "2023",
+  "superficie": 20,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Estructura Metálica, muros de hormigón a la vista. Pérgola bioclimática.",
+  "renders": false
+}
