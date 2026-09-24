@@ -63,7 +63,7 @@ for (const p of proyectos) {
   p.pagina = `${p.slug}.html`;
   const datos = [
     ['Ubicación', p.ubicacion], ['Año', p.anio], ['Superficie', p.superficie ? `${p.superficie} m²` : ''],
-    ['Pisos', p.pisos], ['Estado', p.estado], ['Categoría', CAT1[p.categoria] || p.categoria], ['Materialidad', p.materialidad]
+    ['Pisos', p.pisos], ['Materialidad', p.materialidad] // Estado y Categoría no se muestran en la ficha (siguen usándose en los filtros)
   ].filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '');
   const ficha = datos.map(([k, v]) => `<div class="dato"><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
   const programa = (p.programa || []).filter(Boolean).map(r => `<li>${esc(r)}</li>`).join('');
@@ -71,8 +71,10 @@ for (const p of proyectos) {
   const encargo = (p.encargo || '').trim()
     ? `<div class="encargo"><h2 class="label">Encargo</h2>${p.encargo.trim().split(/\n\s*\n/).map(t => `<p>${esc(t.trim())}</p>`).join('')}</div>`
     : '';
+  const portSrc = p.portada || galeria[0]?.foto; // foto cuadrada que abre la ficha
   let gal = '';
   for (const [i, g] of galeria.entries()) {
+    if (g.foto === portSrc) continue; // ya se muestra arriba
     const f = await photo(g.foto); if (!f) continue;
     const forma = FORM[g.formato] || 'sq', pos = POS[g.encuadre] || POS['Centro'];
     const alt = esc(g.descripcion || `${p.nombre}, imagen ${i + 1}`);
@@ -82,11 +84,13 @@ for (const p of proyectos) {
     gal += `<li class="g-item g-${forma}"><button type="button" class="g-btn" data-i="${i}" aria-label="Ampliar imagen ${i + 1}: ${alt}"><img src="${f.sm}"${srcset} data-full="${f.lg}" alt="${alt}" loading="lazy" style="object-position:${pos}"></button></li>`;
   }
   const port = await photo(p.portada || galeria[0]?.foto);
+  const fotoHtml = port ? `<figure class="p-foto"><img src="${port.lg}"${port.sm !== port.lg ? ` srcset="${port.sm} 900w, ${port.lg} 2000w" sizes="(min-width:900px) 50vw, 100vw"` : ''} alt="${esc(p.nombre)}" fetchpriority="high"></figure>` : '';
+  const tplUse = programa ? tplP : tplP.replace(/\s*<h2 class="label">Programa<\/h2>\s*<ul class="recintos">%%PROGRAMA%%<\/ul>/, '');
   const descAuto = [p.nombre, [CAT1[p.categoria] ? CAT1[p.categoria].toLowerCase() : '', p.ubicacion ? `en ${p.ubicacion}` : ''].filter(Boolean).join(' '), p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(', ') + '. Proyecto de Gonzalo Arteche Arquitecto.';
   const resumen = (p.encargo || '').trim().replace(/\s+/g, ' ');
   const desc = resumen ? (resumen.length > 158 ? resumen.slice(0, 155).replace(/[\s,.;:]+\S*$/, '') + '…' : resumen) : descAuto;
-  const html = tplP.replaceAll('%%NOMBRE%%', esc(p.nombre)).replaceAll('%%DESC%%', esc(desc)).replace('%%OGIMG%%', port ? port.lg : 'img/portada.jpg')
-    .replace('%%FICHA%%', ficha).replace('%%PROGRAMA%%', programa).replace('%%NOTA%%', nota).replace('%%ENCARGO%%', encargo).replace('%%GALERIA%%', gal);
+  const html = tplUse.replaceAll('%%NOMBRE%%', esc(p.nombre)).replaceAll('%%DESC%%', esc(desc)).replace('%%OGIMG%%', port ? port.lg : 'img/portada.jpg')
+    .replace('%%FOTO%%', fotoHtml).replace('%%FICHA%%', ficha).replace('%%PROGRAMA%%', programa).replace('%%NOTA%%', nota).replace('%%ENCARGO%%', encargo).replace('%%GALERIA%%', gal);
   fs.writeFileSync(path.join(OUT, p.pagina), html);
 }
 
