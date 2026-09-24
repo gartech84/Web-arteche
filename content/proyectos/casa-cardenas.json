@@ -41,12 +41,12 @@
     },
     {
       "foto": "/media/proyectos/cierre-perimetral.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
       "foto": "/media/proyectos/fachada-poniente.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
