@@ -357,12 +357,13 @@ img{display:block;max-width:100%}
 .p-intro-txt .nota{font-size:13px}
 /* Celular: todo más compacto para que foto + ficha (hasta Materialidad) quepan en la primera pantalla */
 @media (max-width:899px){
-  .hero.p-hero{padding-bottom:18px}
-  .p-hero .page-label{margin-top:8px;margin-bottom:10px}
-  .p-intro{padding-top:16px;gap:18px}
-  .p-intro-txt{gap:32px}
-  .p-intro-txt .dato{padding:9px 0}
-  .p-intro-txt .dato dd{margin-top:3px}
+  .hero.p-hero{padding-bottom:14px}
+  .p-hero .page-label{margin-top:2px;margin-bottom:4px}
+  .p-intro{padding-top:12px;gap:14px}
+  .p-intro-txt{gap:30px}
+  .p-intro-txt .ficha{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
+  .p-intro-txt .dato{padding:7px 0}
+  .p-intro-txt .dato dd{margin-top:2px;line-height:1.25}
   /* Programa en línea continua: ● Estar ● Cocina… sin cortar un recinto entre dos líneas */
   .p-intro-txt .recintos{columns:auto;display:flex;flex-wrap:wrap;gap:4px 18px}
   .p-intro-txt .recintos li{white-space:nowrap;padding:2px 0 2px 14px}
