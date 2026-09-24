@@ -3,5 +3,71 @@
   "visible": true,
   "orden": 17,
   "categoria": "Quinchos y remodelaciones",
-  "renders": false
+  "ubicacion": "La Reina, Región Metropolitana",
+  "anio": "2023",
+  "superficie": 20,
+  "pisos": 1,
+  "estado": "Construido",
+  "materialidad": "Remodelación integral de cocina, logia y dormitorio de servicio. Muebles en Melamina y cubiertas de cuarzo. ",
+  "programa": [
+    "Cocina",
+    "Comedor de Diario",
+    "Logia",
+    "Dormitorio de Servicio",
+    "Baño de Servicio"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/0n2a0776.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/0n2a0782.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0758.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0749.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0744.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0720.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0698.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0822.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0813.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0810.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/0n2a0803.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
