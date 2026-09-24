@@ -37,7 +37,7 @@ content:
         type: select
         required: true
         options:
-          values: [Casas, Comercial, Quinchos y remodelaciones]
+          values: [Casas, Comercial, Quinchos, Remodelaciones]
       - name: ubicacion
         label: Ubicación
         description: "Ej: Maitencillo, V Región"
