@@ -21,6 +21,31 @@
       "foto": "/media/proyectos/3.png",
       "formato": "Cuadrada",
       "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/5.png",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/3-6.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/living01-1.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/quincho01.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/quincho02.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
     }
   ]
 }
