@@ -10,5 +10,17 @@
   "estado": "Construido",
   "materialidad": "Estructura Metalica y Paneles SIP revestidos en fibrocemento ranurado",
   "renders": false,
-  "portada": "/media/proyectos/1-1.jpg"
+  "portada": "/media/proyectos/1-gigapixel-standard-scale-200x.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/2.png",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/3.png",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
 }
