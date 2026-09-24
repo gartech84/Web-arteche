@@ -289,6 +289,15 @@ img{display:block;max-width:100%}
 }
 
 .icons svg .fillp{fill:#fff;stroke:none}
+/* Franja de Proyectos: título del mismo tamaño que el de cada ficha, bajada más chica y franja más baja */
+.hero-short .page-title{font-size:clamp(28px,3.1vw,46px)}
+.hero-short .page-intro{font-size:clamp(14px,1.1vw,17px);margin-top:clamp(10px,1.2vw,16px)}
+.hero.hero-short{padding-bottom:clamp(26px,2.6vw,40px)}
+.hero-short .page-label{margin-top:clamp(18px,2.6vw,40px);margin-bottom:clamp(12px,1.4vw,20px)}
+@media (max-width:899px){
+  .hero.hero-short{padding-bottom:18px}
+  .hero-short .page-label{margin-top:22px;margin-bottom:10px}
+}
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
