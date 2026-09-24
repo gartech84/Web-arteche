@@ -62,11 +62,6 @@
       "foto": "/media/proyectos/living02.jpg",
       "formato": "Cuadrada",
       "encuadre": "Centro"
-    },
-    {
-      "foto": "/media/proyectos/planta-croquis.jpg",
-      "formato": "Horizontal",
-      "encuadre": "Centro"
     }
   ]
 }
