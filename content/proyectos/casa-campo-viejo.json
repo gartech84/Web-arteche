@@ -50,7 +50,7 @@
     },
     {
       "foto": "/media/proyectos/casa-campo-viejo/fachada.jpg",
-      "formato": "Horizontal",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Fachada posterior con vista al mar"
     }
