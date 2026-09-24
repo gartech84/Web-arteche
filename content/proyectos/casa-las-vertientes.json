@@ -25,7 +25,7 @@
   "galeria": [
     {
       "foto": "/media/proyectos/casa-las-vertientes/panoramica.jpg",
-      "formato": "Panorámica",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Vista general de la casa sobre la loma, con el bosque detrás"
     },
@@ -49,13 +49,13 @@
     },
     {
       "foto": "/media/proyectos/casa-las-vertientes/portada.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Living con salamandra central y comedor al fondo"
     },
     {
       "foto": "/media/proyectos/casa-las-vertientes/living-patio.jpg",
-      "formato": "Vertical",
+      "formato": "Cuadrada",
       "encuadre": "Centro",
       "descripcion": "Living con patio interior y circulación hacia los dormitorios"
     },
