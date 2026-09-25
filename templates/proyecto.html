@@ -137,7 +137,7 @@ img{display:block;max-width:100%}
 .back{display:inline-flex;gap:10px;align-items:center;color:var(--on-navy)!important;min-height:44px}
 .back-ic{width:1.3em;height:1.3em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
 .back:hover .back-ic{transform:translateX(-3px)}
-@media (max-width:899px){ .back{gap:12px;margin-left:-4px;padding:4px} .back-ic{width:26px;height:26px} }
+@media (max-width:899px){ .back{gap:8px;margin-left:-4px;padding:4px;font-size:9.5px;letter-spacing:.2em} .back-ic{width:18px;height:18px} }
 .back:hover{opacity:.8}
 .p-info{padding:clamp(56px,7vw,110px) 0 clamp(40px,5vw,72px)}
 .p-grid{display:grid;grid-template-columns:1fr;gap:clamp(44px,5vw,80px)}
@@ -358,7 +358,7 @@ img{display:block;max-width:100%}
 /* Celular: todo más compacto para que foto + ficha (hasta Materialidad) quepan en la primera pantalla */
 @media (max-width:899px){
   .hero.p-hero{padding-bottom:14px}
-  .p-hero .page-label{margin-top:2px;margin-bottom:4px}
+  .p-hero .page-label{margin-top:5px;margin-bottom:1px} /* "Proyectos" centrado entre el logo y el título */
   .p-intro{padding-top:12px;gap:14px}
   .p-intro-txt{gap:30px}
   .p-intro-txt .ficha{grid-template-columns:minmax(0,3fr) minmax(0,2fr)}
@@ -377,6 +377,12 @@ img{display:block;max-width:100%}
   .p-intro-txt > *{width:100%;max-width:30rem}
   .p-intro-txt .ficha .dato:first-child,.p-intro-txt .ficha .dato:nth-child(2){padding-top:0;border-top:0}
 }
+/* Llamado final: "Ver más proyectos" como píldora de contorno blanco; ambos botones del mismo ancho */
+.cta .actions{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;width:fit-content;gap:clamp(12px,1.4vw,20px)}
+.cta .pill{justify-content:space-between}
+.pill-line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.95)}
+.pill-line:hover{background:rgba(255,255,255,.12)}
+@media (max-width:639px){ .cta .actions{grid-auto-flow:row} }
 </style>
 <script>document.documentElement.classList.add('js')</script>
 <link rel="icon" href="favicon.ico" sizes="48x48">
@@ -432,7 +438,7 @@ img{display:block;max-width:100%}
       <p class="body">Cuéntanos tu idea y preparamos una primera conversación a la medida de tu proyecto.</p>
       <div class="actions">
         <a class="pill" href="contacto.html">Hablemos de tu proyecto<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg></a>
-        <a class="link" href="proyectos.html">Ver más proyectos<svg class="arrow" viewBox="0 0 25 18" aria-hidden="true"><path d="M1 9h23M16 1l8 8-8 8"/></svg></a>
+        <a class="pill pill-line" href="proyectos.html">Ver más proyectos<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg></a>
       </div>
     </div>
   </section>
