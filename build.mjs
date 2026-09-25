@@ -245,6 +245,19 @@ if (CF_TOKEN) {
 } else {
   console.log('Cloudflare Web Analytics: sin token todavía (agrega CF_ANALYTICS_TOKEN en Cloudflare cuando lo tengas).');
 }
+// Umami: cuenta personas distintas sin cookies (no requiere aviso de cookies). El ID del sitio se agrega
+// en Cloudflare (Settings → Build → Variables → UMAMI_ID); si no está, no se agrega nada.
+const UMAMI_ID = (process.env.UMAMI_ID || '').trim();
+if (/^[0-9a-f-]{36}$/i.test(UMAMI_ID)) {
+  const tag = `<script defer src="https://cloud.umami.is/script.js" data-website-id="${UMAMI_ID}" data-domains="www.artechearquitecto.com,artechearquitecto.com"></script>\n`;
+  for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
+    const p = path.join(OUT, f);
+    fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('</head>', tag + '</head>'));
+  }
+  console.log('Umami: activado.');
+} else {
+  console.log(UMAMI_ID ? 'Umami: el UMAMI_ID no tiene el formato esperado; revisa que esté bien copiado.' : 'Umami: sin UMAMI_ID todavía.');
+}
 console.log(INDEXAR ? `SEO: indexación activada para ${SITE}` : 'SEO: modo prueba (noindex en todas las páginas)');
 
 console.log(`Listo: ${proyectos.length} proyectos en la grilla, ${proyectos.filter(p => p.pagina).length} con ficha propia.`);
