@@ -26,6 +26,21 @@
       "encuadre": "Centro"
     },
     {
+      "foto": "/media/proyectos/05-mod-3.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/03-modificado-2-1.png",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/04-modificado-final.png",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
       "foto": "/media/proyectos/02-modificado4.jpg",
       "formato": "Cuadrada",
       "encuadre": "Centro"
@@ -37,16 +52,6 @@
     },
     {
       "foto": "/media/proyectos/living-02-editado.jpg",
-      "formato": "Cuadrada",
-      "encuadre": "Centro"
-    },
-    {
-      "foto": "/media/proyectos/03-modificado-2-1.png",
-      "formato": "Cuadrada",
-      "encuadre": "Centro"
-    },
-    {
-      "foto": "/media/proyectos/04-modificado-final.png",
       "formato": "Cuadrada",
       "encuadre": "Centro"
     }
