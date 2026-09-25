@@ -126,14 +126,14 @@ h1 .line span{display:block}
 .menu nav a[aria-current="page"]{opacity:.45}
 
 @media (prefers-reduced-motion:no-preference){
-  .bg{animation:settle 2.4s var(--ease) both}
-  .brand,.burger{animation:fade .8s ease both .1s}
-  h1 .line span{animation:rise 1s var(--ease) both}
-  h1 .line:nth-child(1) span{animation-delay:.35s}
-  h1 .line:nth-child(2) span{animation-delay:.48s}
-  .sub{animation:fade .9s ease both .75s}
-  .pill,.link{animation:fade .9s ease both .95s}
-  .place,.icons{animation:fade .8s ease both 1.15s}
+  .bg{animation:settle 3.2s var(--ease) both}
+  .brand,.burger{animation:fade 1.1s ease both .15s}
+  h1 .line span{animation:rise 1.4s var(--ease) both}
+  h1 .line:nth-child(1) span{animation-delay:.5s}
+  h1 .line:nth-child(2) span{animation-delay:.72s}
+  .sub{animation:fade 1.2s ease both 1.1s}
+  .pill,.link{animation:fade 1.2s ease both 1.4s}
+  .place,.icons{animation:fade 1.1s ease both 1.7s}
   @keyframes settle{from{transform:scale(1.06)}to{transform:scale(1)}}
   @keyframes fade{from{opacity:0}to{opacity:1}}
   @keyframes rise{from{transform:translateY(105%)}to{transform:translateY(0)}}
