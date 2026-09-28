@@ -41,17 +41,17 @@
       "encuadre": "Centro"
     },
     {
+      "foto": "/media/proyectos/06-listoe.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
       "foto": "/media/proyectos/living-01-editado.jpg",
       "formato": "Cuadrada",
       "encuadre": "Centro"
     },
     {
       "foto": "/media/proyectos/living-02-editado.jpg",
-      "formato": "Cuadrada",
-      "encuadre": "Centro"
-    },
-    {
-      "foto": "/media/proyectos/06-listoe.jpg",
       "formato": "Cuadrada",
       "encuadre": "Centro"
     }
