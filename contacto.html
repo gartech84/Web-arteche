@@ -480,21 +480,31 @@ textarea.inp{resize:vertical;min-height:110px;line-height:1.5}
         var campo=f.querySelector('input,textarea'); if(!campo) return;
         mapa[campo.name]=f.querySelector('.f-label').childNodes[0].textContent.trim();
     }); }
-    var envio=new FormData();
-    envio.append('access_key',datos.get('access_key'));
-    envio.append('subject',datos.get('subject'));
-    envio.append('from_name',datos.get('from_name'));
-    if(val('email')) envio.append('email',val('email'));
-    if(val('nombre')) envio.append('name',val('nombre'));
+    /* Se envía como JSON para que las tildes y los signos (¿, ñ) lleguen bien al correo */
+    var envio={access_key:datos.get('access_key'),subject:datos.get('subject'),from_name:datos.get('from_name')};
+    if(val('email')) envio.email=val('email');
+    delete mapa.email; /* el correo ya aparece como "Email" */
     Object.keys(mapa).forEach(function(k){
       var els=form.querySelectorAll('[name="'+k+'"]'); if(!els.length) return;
       var v = els[0].type==='checkbox'
         ? Array.prototype.map.call(form.querySelectorAll('[name="'+k+'"]:checked'),function(c){return c.value}).join(', ')
         : val(k);
       if(k==='tipo'){ var et=form.querySelector('input[name="tipo"]:checked'); if(et) v=et.closest('.type').querySelector('.type-t').textContent.trim(); }
-      if(v) envio.append(mapa[k],v);
+      if(v) envio[mapa[k]]=v;
     });
-    fetch(form.action,{method:'POST',body:envio})
+    /* Borrador de respuesta en Gmail (si está configurado): se manda aparte y no afecta el envío */
+    if(window.BORRADOR_URL && val('email')){
+      var crudo={tipo:val('tipo')};
+      form.querySelectorAll('input[name],textarea[name]').forEach(function(c){
+        if(c.type==='hidden'||c.name==='tipo'||c.name in crudo) return;
+        var v = c.type==='checkbox'
+          ? Array.prototype.map.call(form.querySelectorAll('[name="'+c.name+'"]:checked'),function(x){return x.value}).join(', ')
+          : val(c.name);
+        if(v) crudo[c.name]=v;
+      });
+      try{ fetch(window.BORRADOR_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(crudo)}); }catch(err){}
+    }
+    fetch(form.action,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(envio)})
       .then(function(r){ return r.json(); })
       .then(function(d){
         if(!d.success) throw new Error('rechazado');

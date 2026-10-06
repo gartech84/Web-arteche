@@ -245,18 +245,34 @@ if (CF_TOKEN) {
 } else {
   console.log('Cloudflare Web Analytics: sin token todavía (agrega CF_ANALYTICS_TOKEN en Cloudflare cuando lo tengas).');
 }
+// Borrador automático en Gmail: URL de la app de Google Apps Script (Cloudflare → Build → Variables → GMAIL_BORRADOR_URL).
+const BORRADOR_URL = ((process.env.GMAIL_BORRADOR_URL || '').match(/https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec/) || [])[0];
+{
+  const p = path.join(OUT, 'contacto.html');
+  if (BORRADOR_URL && fs.existsSync(p)) {
+    fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('</head>', `<script>window.BORRADOR_URL="${BORRADOR_URL}";</script>\n</head>`));
+    console.log('Borrador Gmail: activado.');
+  } else {
+    console.log(process.env.GMAIL_BORRADOR_URL ? 'Borrador Gmail: la URL no tiene el formato esperado (https://script.google.com/macros/s/…/exec).' : 'Borrador Gmail: sin GMAIL_BORRADOR_URL todavía.');
+  }
+}
+
 // Umami: cuenta personas distintas sin cookies (no requiere aviso de cookies). El ID del sitio se agrega
 // en Cloudflare (Settings → Build → Variables → UMAMI_ID); si no está, no se agrega nada.
-const UMAMI_ID = (process.env.UMAMI_ID || '').trim();
-if (/^[0-9a-f-]{36}$/i.test(UMAMI_ID)) {
-  const tag = `<script defer src="https://cloud.umami.is/script.js" data-website-id="${UMAMI_ID}" data-domains="www.artechearquitecto.com,artechearquitecto.com"></script>\n`;
+const UMAMI_RAW = (process.env.UMAMI_ID || '').trim();
+// Acepta el ID solo o pegado con comillas, espacios o el script completo de Umami: se extrae el código.
+const UMAMI_ID = (UMAMI_RAW.match(/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i) || [])[0];
+if (UMAMI_ID) {
+  const tag = `<script defer src="https://cloud.umami.is/script.js" data-website-id="${UMAMI_ID}"></script>\n`;
   for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
     const p = path.join(OUT, f);
     fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('</head>', tag + '</head>'));
   }
-  console.log('Umami: activado.');
+  console.log(`Umami: activado (ID ${UMAMI_ID}).`);
+} else if (UMAMI_RAW) {
+  console.log(`Umami: no encontré un Website ID válido en UMAMI_ID. Valor recibido (${UMAMI_RAW.length} caracteres): "${UMAMI_RAW.slice(0, 60)}"`);
 } else {
-  console.log(UMAMI_ID ? 'Umami: el UMAMI_ID no tiene el formato esperado; revisa que esté bien copiado.' : 'Umami: sin UMAMI_ID todavía.');
+  console.log('Umami: sin UMAMI_ID todavía.');
 }
 console.log(INDEXAR ? `SEO: indexación activada para ${SITE}` : 'SEO: modo prueba (noindex en todas las páginas)');
 
