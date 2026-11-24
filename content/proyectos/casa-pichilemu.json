@@ -1,0 +1,47 @@
+{
+  "nombre": "Casa Pichilemu",
+  "visible": true,
+  "orden": 8,
+  "categoria": "Casas",
+  "ubicacion": "Pichilemu, VI Región",
+  "anio": "2024",
+  "superficie": 230,
+  "pisos": 2,
+  "estado": "Construido",
+  "materialidad": "Paneles Sip, revestidos en madera machihembrada.",
+  "programa": [
+    "4 Dormitorios",
+    "4 Baños",
+    "Estar",
+    "Living",
+    "Comedor",
+    "Cocina",
+    "Hall de Acceso",
+    "Garage",
+    "Terraza Techada"
+  ],
+  "renders": false,
+  "portada": "/media/proyectos/02-3.jpg",
+  "galeria": [
+    {
+      "foto": "/media/proyectos/01-4.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/03-5.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/02-4.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    },
+    {
+      "foto": "/media/proyectos/04-2.jpg",
+      "formato": "Cuadrada",
+      "encuadre": "Centro"
+    }
+  ]
+}
