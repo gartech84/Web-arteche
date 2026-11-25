@@ -274,6 +274,25 @@ if (UMAMI_ID) {
 } else {
   console.log('Umami: sin UMAMI_ID todavía.');
 }
+// Pixel de Meta (ID 1097398011179341): mide visitas desde los anuncios, clics en WhatsApp (Contact)
+// y formularios enviados (Lead). Se agrega a todas las páginas.
+const META_PIXEL_ID = '1097398011179341';
+{
+  const tag = `<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','${META_PIXEL_ID}');fbq('track','PageView');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(a)fbq('track','Contact');});
+document.addEventListener('DOMContentLoaded',function(){var s=document.getElementById('sent');if(!s)return;new MutationObserver(function(m,o){if(!s.hidden){fbq('track','Lead');o.disconnect();}}).observe(s,{attributes:true,attributeFilter:['hidden']});});
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1"/></noscript>
+`;
+  for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
+    const p = path.join(OUT, f);
+    fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('</head>', tag + '</head>'));
+  }
+  console.log(`Pixel de Meta: activado (ID ${META_PIXEL_ID}).`);
+}
+
 console.log(INDEXAR ? `SEO: indexación activada para ${SITE}` : 'SEO: modo prueba (noindex en todas las páginas)');
 
 console.log(`Listo: ${proyectos.length} proyectos en la grilla, ${proyectos.filter(p => p.pagina).length} con ficha propia.`);
