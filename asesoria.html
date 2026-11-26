@@ -44,7 +44,7 @@ a{color:inherit;text-underline-offset:4px}
 .btn.line.arr::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 27 20' fill='none' stroke='%2310161E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 10h25M17 1l9 9-9 9'/%3E%3C/svg%3E")}
 
 .eyebrow{font:600 12px/1.3 var(--font);letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-h2.title{font-size:clamp(1.9rem,4.4vw,2.9rem);line-height:1.08;font-weight:600;margin-top:14px;max-width:16em}
+h2.title{font-size:clamp(1.65rem,3.4vw,2.35rem);line-height:1.1;font-weight:600;margin-top:14px;max-width:16em}
 .short{margin-top:18px;max-width:36em;font-size:1.08rem}
 section{padding-block:64px}
 section+section{border-top:1px solid var(--line)}
@@ -90,11 +90,10 @@ details.more[open]>summary .c{display:inline}
 .facts span::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex:none}
 .foto{position:relative;margin:0}
 .foto img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover;border-radius:20px;background:var(--tint)}
-.foto figcaption{margin-top:12px;text-align:left;color:var(--muted);font-size:.95rem;line-height:1.4}
+.foto figcaption{margin-top:6px;text-align:left;color:var(--muted);font-size:.95rem;line-height:1.4}
 
 /* respaldo compacto */
 .respaldo{padding-block:40px}
-.respaldo h2.title{font-size:clamp(1.4rem,2.8vw,1.8rem);margin-top:10px}
 .respaldo .stats{margin-top:18px;gap:10px}
 .respaldo .stat{padding:14px 16px 12px;gap:4px;border-radius:14px}
 .respaldo .stat b{font-size:clamp(1.05rem,1.8vw,1.25rem)}
@@ -113,7 +112,7 @@ details.more[open]>summary .c{display:inline}
 .historia .eyebrow{color:var(--on-navy-muted)}
 .historia h2{color:var(--on-navy)}
 .historia .short{color:#D3DCE5;max-width:none}
-.historia h2.title{max-width:none;text-wrap:wrap;font-size:clamp(1.6rem,3.3vw,2.5rem)}
+.historia h2.title{max-width:none;text-wrap:wrap}
 .historia .more .body{max-width:none}
 .historia details.more>summary{color:#fff;border-color:rgba(255,255,255,.7)}
 .historia details.more>summary:hover{background:rgba(255,255,255,.1)}
@@ -225,7 +224,7 @@ footer .meta a:hover{text-decoration:underline}
   main .s-planilla{order:7}
 
   /* foto circular: mitad sobre el encabezado, mitad sobre el fondo blanco */
-  .top{padding-bottom:0}
+  .top{padding-top:calc(env(safe-area-inset-top,0px) + 18px);padding-bottom:0}
   .top .bar{padding-block:30px 12px}
   .top .brand{gap:10px}
   .top .brand svg{width:21px}
@@ -303,7 +302,7 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
 
   <section class="respaldo" aria-labelledby="t-quien">
     <span class="eyebrow">Respaldo</span>
-    <h2 class="title" id="t-quien">Obra, oficina y estudio propio</h2>
+    <h2 class="title" id="t-quien" style="max-width:none;text-wrap:wrap">Estudio propio y experiencia en obra</h2>
     <div class="stats">
       <div class="stat"><b>+15 años</b><span>de experiencia en todo tipo de proyectos</span></div>
       <div class="stat"><b>Desde 2014</b><span>con estudio propio, dedicado a proyectos residenciales y comerciales</span></div>
@@ -337,7 +336,7 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
 
   <section class="con-linea" aria-labelledby="t-vid">
     <span class="eyebrow">Conversación</span>
-    <h2 class="title" id="t-vid" style="max-width:none;text-wrap:wrap">Mi camino, contado en una entrevista</h2>
+    <h2 class="title" id="t-vid" style="max-width:none;text-wrap:wrap">Te cuento mi camino</h2>
     <figure class="video-wrap">
       <video controls playsinline preload="metadata" poster="/img/asesoria/poster.jpg" aria-label="Video de ejemplo de la entrevista">
         <source src="/img/asesoria/entrevista.mp4" type="video/mp4">
@@ -381,7 +380,7 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
 
   <section class="s-formatos" aria-labelledby="t-pl" id="formatos">
     <span class="eyebrow">Formatos</span>
-    <h2 class="title" id="t-pl">Un programa o una sesión puntual</h2>
+    <h2 class="title" id="t-pl">Sesión puntual o programa</h2>
     <p class="short">Las sesiones pueden ser presenciales u online, e idealmente presenciales*: así se genera un espacio de conversación más cercano, que es la idea de todo esto.</p>
     <div class="formatos">
       <div class="formato"><span class="eyebrow">1 sesión · 45 min</span><h3>Sesión puntual</h3><p class="l">Para revisar algo concreto.</p>
@@ -400,7 +399,7 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
 
   <section class="s-planilla" aria-labelledby="t-form" id="planilla">
     <span class="eyebrow">Planilla</span>
-    <h2 class="title" id="t-form">Cuéntame dónde estás y qué quieres resolver</h2>
+    <h2 class="title" id="t-form">Cuéntame qué quieres resolver</h2>
     <p class="short">Llena la planilla y me llega directo a mi correo. Te escribo para coordinar la sesión.</p>
 
     <form class="planilla" id="form" novalidate>
