@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Asesoría para arquitectos que quieren independizarse | Gonzalo Arteche Arquitecto</title>
-<meta name="description" content="Sesiones de asesoría con Gonzalo Arteche, arquitecto con estudio propio desde 2014, para arquitectos que dan sus primeros pasos como independientes: clientes, encargos y equipo.">
+<meta name="description" content="Sesiones de asesoría con Gonzalo Arteche, arquitecto con estudio propio desde 2014, para arquitectos que dan sus primeros pasos como independientes: clientes, encargos y organización.">
 <link rel="canonical" href="https://www.artechearquitecto.com/asesoria">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Asesoría para arquitectos que dan sus primeros pasos como independientes">
@@ -248,12 +248,21 @@ footer .meta a:hover{text-decoration:underline}
   .cta .btn svg{width:15px;height:15px}
   .facts{margin-top:22px;font-size:.88rem}
 
-  /* tarjetas que se deslizan hacia el lado */
-  .temas,.pasos,.formatos{display:flex;grid-template-columns:none;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-20px;padding-inline:20px;scroll-padding-inline:20px;padding-bottom:8px;-webkit-overflow-scrolling:touch;scrollbar-width:none;align-items:flex-start;border-top:0}
-  .temas::-webkit-scrollbar,.pasos::-webkit-scrollbar,.formatos::-webkit-scrollbar{display:none}
-  .temas>*,.pasos>*,.formatos>*{flex:0 0 80%;min-width:0;scroll-snap-align:start}
-  .pasos>li{flex-basis:68%}
-  .formatos{align-items:stretch}
+  /* cuadrícula 2x2 (sin deslizar hacia el lado) */
+  .temas,.pasos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-inline:0;padding:0;overflow:visible;border-top:0;align-items:stretch}
+  .formatos{display:grid;grid-template-columns:minmax(0,1fr);gap:12px;margin-inline:0;padding:0;overflow:visible;border-top:0}
+  .tema{padding:16px 14px 14px;border-radius:16px;min-height:168px}
+  .tema .eyebrow{font-size:9.5px;margin-bottom:6px}
+  .tema h3{font-size:1.02rem;line-height:1.22}
+  .tema details.more{margin-top:auto;padding-top:12px}
+  .tema details.more>summary{padding:8px 13px;font-size:12.5px}
+  .tema:not(:has(details[open])) p.l{display:none}
+  .tema:has(details[open]){grid-column:1/-1}
+  .tema:has(details[open]) details.more{margin-top:14px;padding-top:0}
+  .pasos li{padding:16px 14px;border-radius:16px;gap:6px}
+  .pasos li::before{width:30px;height:30px;font-size:.85rem;margin-bottom:4px}
+  .pasos h3{font-size:1rem;line-height:1.2}
+  main .pasos p{font-size:.88rem;text-align:left!important;hyphens:manual!important;-webkit-hyphens:manual!important}
   .formato,.formato+.formato{padding:24px;border:1.5px solid var(--line)}
   .s-como details.more{margin-top:14px}
   .temas,.formatos{margin-top:22px}
@@ -350,22 +359,22 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
     <span class="eyebrow">Temario</span>
     <h2 class="title" id="t-tem">Lo que vamos a trabajar</h2>
     <div class="temas">
-      <div class="tema"><span class="eyebrow">Clientes</span><h3>Captar clientes y generar confianza</h3><p class="l">Cómo preparar la primera reunión y presentar tu trabajo con claridad.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>La primera reunión suele decidir si te contratan o no. Vemos qué preguntar para entender lo que el cliente necesita, cómo explicar tu forma de trabajar sin tecnicismos y cómo presentar tus honorarios con claridad.</p></div></details></div>
-      <div class="tema"><span class="eyebrow">Encargos</span><h3>Llevar un encargo de principio a fin</h3><p class="l">Etapas, acuerdos y pedidos al cliente, de la idea a la entrega.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Un encargo se ordena por etapas: primera reunión, proyecto, documentación, obra y entrega. Vemos qué definir en cada una, cómo dejar los acuerdos por escrito y cómo evitar que el proyecto se alargue o se desordene.</p></div></details></div>
-      <div class="tema"><span class="eyebrow">Equipo</span><h3>Coordinar el equipo en cada etapa</h3><p class="l">Especialistas, constructora e ITO trabajando en la misma dirección.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Vemos cómo armar tu red de colaboradores, cómo repartir responsabilidades, cómo conversar con quien está en obra y qué revisar para que lo que dibujaste se pueda construir.</p></div></details></div>
-      <div class="tema"><span class="eyebrow">Independencia</span><h3>Sostener tu trabajo por cuenta propia</h3><p class="l">Ordenar tu día a día y crecer a tu ritmo, con criterio.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Cuánto trabajo puedes tomar, cómo combinar un empleo con tus primeros encargos si lo necesitas y cómo ir creciendo sin quemarte.</p></div></details></div>
+      <div class="tema"><span class="eyebrow">Al partir</span><h3>Organizar tu comienzo</h3><p class="l">Por dónde partir y cómo darle forma a tu trabajo.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Para quien ya decidió independizarse o está dando los primeros pasos: por dónde partir, qué conviene tener resuelto antes de tu primer cliente, cómo organizar tu tiempo y tu forma de trabajar, y cómo combinar un empleo con tus primeros encargos si lo necesitas. También conversamos las dudas e inseguridades del comienzo. Puedes venir con un proyecto o sin él.</p></div></details></div>
+      <div class="tema"><span class="eyebrow">Primeros clientes</span><h3>Clientes y primeras reuniones</h3><p class="l">Herramientas concretas para que te encuentren y te contraten.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Cómo hacer que te encuentren y te contraten: armar tu portafolio, mostrar tu trabajo en Instagram y en una web simple, activar recomendaciones y contactos, y qué herramientas sirven al comienzo. Después, cómo preparar la primera reunión, explicar tu forma de trabajar sin tecnicismos y presentar tus honorarios con claridad. Si ya tienes un cliente o una propuesta en camino, la trabajamos con tu caso.</p></div></details></div>
+      <div class="tema"><span class="eyebrow">Tu primer proyecto</span><h3>Control de principio a fin</h3><p class="l">Etapas, acuerdos y colaboradores, de la idea a la entrega.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Un encargo se ordena por etapas: primera reunión, proyecto, documentación, obra y entrega. Vemos qué definir en cada una, cómo dejar los acuerdos por escrito, cómo armar tu red de colaboradores y cómo conversar con quien está en obra. Si ya tienes un proyecto en marcha, lo vemos con tu caso real.</p></div></details></div>
+      <div class="tema"><span class="eyebrow">En el tiempo</span><h3>Crecer a tu ritmo</h3><p class="l">Un trabajo ordenado que puedas mantener con los años.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Cuánto trabajo tomar sin sobrecargarte, cómo ordenar tu semana, qué hacer cuando llegan varios encargos a la vez y cómo ir creciendo con criterio, cuidando tu tiempo y la calidad de lo que entregas.</p></div></details></div>
     </div>
   </section>
 
   <section class="s-como" aria-labelledby="t-fun" id="como">
     <span class="eyebrow">Cómo funciona</span>
-    <h2 class="title" id="t-fun">De la planilla a tu primera sesión</h2>
+    <h2 class="title" id="t-fun">Del formulario a tu primera sesión</h2>
     <ol class="pasos">
-      <li><h3>Llenas la planilla</h3><p>Me cuentas en qué punto estás.</p></li>
+      <li><h3>Llenas el formulario</h3><p>Me cuentas qué quieres trabajar.</p></li>
       <li><h3>Coordinamos</h3><p>Acordamos día, horario y si es presencial u online.</p></li>
       <li><h3>Sesión de 45 min</h3><p>Trabajamos sobre lo que traes.</p></li>
       <li><h3>Decides cómo seguir</h3><p>Otra sesión o un programa.</p></li>
@@ -383,14 +392,14 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
     <h2 class="title" id="t-pl">Sesión puntual o programa</h2>
     <p class="short">Las sesiones pueden ser presenciales* u online. Mi preferencia son siempre las presenciales: la conversación fluye mejor y se genera un entorno más cercano, de confianza.</p>
     <div class="formatos">
-      <div class="formato"><span class="eyebrow">1 sesión · 45 min</span><h3>Sesión puntual</h3><p class="l">Para revisar algo concreto.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>45 minutos enfocados en lo que traes: la duda de un proyecto, una propuesta para un cliente o una situación de obra. Te vas con un camino claro para resolverlo.</p><p class="valor"><b>Valor:</b> $50.000</p></div></details>
+      <div class="formato"><span class="eyebrow">1 sesión · 45 min</span><h3>Sesión puntual</h3><p class="l">Para resolver una duda o revisar algo concreto.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>45 minutos para conversar lo que te inquieta: una duda sobre cómo partir, una propuesta para un cliente, un proyecto que estás empezando o una decisión pendiente. Puedes venir con un proyecto o sin él. Te vas con un camino más claro.</p><p class="valor"><b>Valor:</b> $50.000</p></div></details>
         <div class="acc"><button class="btn sm arr" type="button" data-plan="Sesión puntual">Elegir</button></div></div>
-      <div class="formato"><span class="eyebrow">2 sesiones · 45 min c/u</span><h3>Programa de 2 sesiones</h3><p class="l">Para ordenar la base de tu trabajo.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>En la primera revisamos dónde estás y cómo organizar tu forma de trabajar; en la segunda vemos cómo captar y llevar tus primeros encargos.</p><p class="valor"><b>Valor:</b> $80.000 ($40.000 por sesión)</p></div></details>
+      <div class="formato"><span class="eyebrow">2 sesiones · 45 min c/u</span><h3>Programa de 2 sesiones</h3><p class="l">Para armar tu forma de trabajar.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>En la primera revisamos dónde estás y cómo te gustaría trabajar; en la segunda ordenamos tus primeros pasos: clientes, honorarios y organización. Si ya tienes un proyecto o un cliente, lo llevamos a tu caso real.</p><p class="valor"><b>Valor:</b> $80.000 ($40.000 por sesión)</p></div></details>
         <div class="acc"><button class="btn sm arr" type="button" data-plan="Programa de 2 sesiones">Elegir</button></div></div>
-      <div class="formato"><span class="eyebrow">1 sesión · 45 min</span><h3>Sesión adicional</h3><p class="l">Para seguir trabajando después de tu programa o sesión.</p>
-        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Para quien ya tomó una sesión o un programa y quiere continuar: revisar un caso real tuyo, un proyecto en curso o una propuesta que estés armando, o profundizar en la coordinación del equipo.</p><p class="valor"><b>Valor:</b> $40.000</p></div></details>
+      <div class="formato"><span class="eyebrow">1 sesión · 45 min</span><h3>Sesión adicional</h3><p class="l">Para seguir trabajando juntos.</p>
+        <details class="more"><summary><span class="o">Ver detalle</span><span class="c">Ocultar</span></summary><div class="body"><p>Para quien ya tomó una sesión o un programa y quiere seguir conversando: las nuevas dudas que van apareciendo, un caso real tuyo o un proyecto en curso, o profundizar en cómo coordinar a tu equipo.</p><p class="valor"><b>Valor:</b> $40.000</p></div></details>
         <div class="acc"><button class="btn sm arr" type="button" data-plan="Sesión adicional">Elegir</button></div></div>
     </div>
     <p class="nota-pie">*Las sesiones presenciales se realizan en mi oficina en la comuna de Lo Barnechea, Santiago.</p>
@@ -398,9 +407,9 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
 
 
   <section class="s-planilla" aria-labelledby="t-form" id="planilla">
-    <span class="eyebrow">Planilla</span>
+    <span class="eyebrow">Formulario</span>
     <h2 class="title" id="t-form">Cuéntame qué quieres resolver</h2>
-    <p class="short">Llena la planilla y me llega directo a mi correo. Te escribo para coordinar la sesión.</p>
+    <p class="short">Llena el formulario y me llega directo a mi correo. Te escribo para coordinar la sesión.</p>
 
     <form class="planilla" id="form" novalidate>
       <div class="f"><label for="nombre">Nombre</label><input id="nombre" name="nombre" type="text" autocomplete="name" required></div>
@@ -519,7 +528,7 @@ main p:not(.facts):not(.estado){text-align:justify;text-justify:inter-word;hyphe
       res.hidden = false;
       res.scrollIntoView({behavior: reduce ? 'auto' : 'smooth', block:'start'});
     }
-    if(KEY.indexOf('PEGA_') === 0 || !window.fetch){ manual(); return; }
+    if(!window.fetch){ manual(); return; }
     btn.disabled = true; envio.textContent = 'Enviando…';
     fetch('https://api.web3forms.com/submit', {
       method:'POST',
