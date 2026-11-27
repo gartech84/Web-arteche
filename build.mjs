@@ -237,7 +237,7 @@ for (const { z, casas } of conCasas) {
     .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(titulo)}">`)
     .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(z.desc)}">`)
     .replace(/<h1 class="label page-label">[^<]*<\/h1>\s*<p class="page-title">[^<]*<\/p>\s*<p class="page-intro">[^<]*<\/p>/,
-      `<p class="label page-label"><a href="proyectos.html" style="color:inherit">Proyectos</a> / ${esc(z.corto)}</p>\n    <h1 class="page-title">${esc(z.lema)}</h1>\n    <p class="page-intro">${esc(intro)}</p>`)
+      `<a class="label page-label back" href="proyectos.html" aria-label="Volver a Proyectos"><svg class="back-ic" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4M10 6l-6 6 6 6"/></svg>Proyectos</a>\n    <h1 class="page-title">${esc(z.lema)}</h1>\n    <p class="page-intro">${esc(intro)}</p>`)
     .replace(/<div class="filters"[\s\S]*?<\/div>\s*/, '')
     .replace('%%ZONAS%%', '')
     .replace('%%COUNT%%', `${n} ${n === 1 ? 'casa' : 'casas'} en ${esc(z.donde)}`)

@@ -53,6 +53,11 @@ img{display:block;max-width:100%}
 /* ---------- Encabezado: Estudio + foto + datos + cifras ---------- */
 .hero{background:var(--navy);color:#fff;padding-bottom:clamp(64px,8vw,120px)}
 .page-label{margin:clamp(44px,7vw,110px) 0 clamp(20px,2.4vw,32px);color:var(--on-navy)}
+.back{display:inline-flex;gap:10px;align-items:center;color:var(--on-navy)!important;min-height:44px}
+.back-ic{width:1.3em;height:1.3em;flex:none;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
+.back:hover .back-ic{transform:translateX(-3px)}
+@media (max-width:899px){ .back{gap:8px;margin-left:-4px;padding:4px;font-size:9.5px;letter-spacing:.2em} .back-ic{width:18px;height:18px} }
+.back:hover{opacity:.8}
 .intro{display:grid;grid-template-columns:1fr;gap:clamp(28px,4vw,64px)}
 .portrait{margin:0}
 .portrait .ph{position:relative;aspect-ratio:4/5;overflow:hidden;background:#2a2a2a}
