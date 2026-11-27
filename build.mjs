@@ -284,28 +284,65 @@ const INDEXAR = String(process.env.INDEXAR || '').toLowerCase() === 'si';
 const SITE = (process.env.SITE_URL || (INDEXAR ? 'https://www.artechearquitecto.com' : 'https://web-arteche.garteche.workers.dev')).replace(/\/$/, '');
 const abs = u => /^https?:/.test(u) ? u : `${SITE}/${u.replace(/^\//, '')}`;
 const urlDe = f => f === 'index.html' ? `${SITE}/` : `${SITE}/${encodeURI(f.replace(/\.html$/, ''))}`;
+// Datos estructurados (schema.org): le dicen a Google y a los buscadores con IA quién es el estudio,
+// qué hace, dónde trabaja y quién lo dirige. Solo datos reales: sin reseñas, precios ni dirección exacta.
+const IG = 'https://www.instagram.com/gonzalo_arteche_arquitecto/';
+const SERVICIOS = [
+  ['Diseño y construcción de casas a medida', 'Casas a medida en todo Chile, con foco en casas grandes. El estudio se hace cargo del diseño y la obra la ejecutan constructoras de su confianza.'],
+  ['Diseño de arquitectura', 'Proyecto de arquitectura de la casa, desde la primera idea hasta el diseño final.'],
+  ['Documentación para construcción', 'Planos y especificaciones para construir, coordinados con los especialistas.'],
+  ['Coordinación de las obras', 'Seguimiento de la obra con constructoras de confianza que conocen la zona.'],
+  ['Acompañamiento al cliente', 'Un solo responsable que acompaña al cliente durante todo el proyecto.']
+];
 const ESTUDIO = {
   '@type': 'ProfessionalService', '@id': `${SITE}/#estudio`,
   name: 'Gonzalo Arteche Arquitecto', url: `${SITE}/`,
-  description: 'Estudio de arquitectura en Lo Barnechea, Santiago. Diseño y construcción de casas a medida en todo Chile, con constructoras de confianza.',
+  description: 'Estudio de arquitectura en Lo Barnechea, Santiago. Diseña y construye casas a medida en todo Chile, con foco en casas grandes, a través de constructoras de confianza.',
   logo: abs('apple-touch-icon.png'), image: abs('img/portada.jpg'),
   telephone: '+56992511880', email: 'contacto@artechearquitecto.com', foundingDate: '2014',
+  // Solo comuna y región: el estudio no publica su dirección exacta
   address: { '@type': 'PostalAddress', addressLocality: 'Lo Barnechea', addressRegion: 'Región Metropolitana', addressCountry: 'CL' },
+  contactPoint: { '@type': 'ContactPoint', contactType: 'Consultas de proyectos', telephone: '+56992511880', email: 'contacto@artechearquitecto.com', url: `${SITE}/contacto`, areaServed: 'CL', availableLanguage: ['es'] },
   // Todo Chile, más las zonas donde el estudio tiene obra (costa de la V Región y litoral, y el sur)
   areaServed: [
     { '@type': 'Country', name: 'Chile' },
     ...['Región de Valparaíso', "Región del Libertador General Bernardo O'Higgins", 'Región de Los Ríos', 'Región de Los Lagos'].map(name => ({ '@type': 'AdministrativeArea', name })),
     ...['Maitencillo', 'Zapallar', 'Santo Domingo', 'Pichilemu', 'Lago Ranco', 'Futrono', 'Puerto Varas'].map(name => ({ '@type': 'Place', name }))
   ],
+  knowsAbout: ['Arquitectura residencial', 'Casas a medida', 'Casas de playa', 'Casas de lago', 'Diseño y construcción de casas', 'Coordinación de obras'],
+  hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Servicios del estudio',
+    itemListElement: SERVICIOS.map(([name, description]) => ({ '@type': 'Offer', itemOffered: { '@type': 'Service', name, description, provider: { '@id': `${SITE}/#estudio` }, areaServed: { '@type': 'Country', name: 'Chile' } } })) },
   founder: { '@id': `${SITE}/estudio#gonzalo` },
-  sameAs: ['https://www.instagram.com/gonzalo_arteche_arquitecto/', 'https://www.linkedin.com/in/gonzalo-arteche-rautenberg-1939b4167/', 'https://www.facebook.com/profile.php?id=100065340315698']
+  employee: { '@id': `${SITE}/estudio#gonzalo` },
+  sameAs: [IG, 'https://www.facebook.com/profile.php?id=100065340315698']
 };
 const PERSONA = {
   '@type': 'Person', '@id': `${SITE}/estudio#gonzalo`, name: 'Gonzalo Arteche Rautenberg',
-  jobTitle: 'Arquitecto fundador y director', image: abs('img/gonzalo-arteche.jpg'),
-  alumniOf: { '@type': 'CollegeOrUniversity', name: 'Universidad del Desarrollo' },
-  worksFor: { '@id': `${SITE}/#estudio` }
+  jobTitle: 'Arquitecto y urbanista, fundador y director del estudio', image: abs('img/gonzalo-arteche.jpg'),
+  description: 'Arquitecto y urbanista de la Universidad del Desarrollo, con Máster en Infoarquitectura en FX Animation, Barcelona. Tiene más de 15 años de experiencia, más de 12 como independiente, y trabajó en oficinas de arquitectura en Chile y Australia antes de fundar su estudio en 2014.',
+  url: `${SITE}/estudio`,
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Universidad del Desarrollo', address: { '@type': 'PostalAddress', addressCountry: 'CL' } },
+    { '@type': 'EducationalOrganization', name: 'FX Animation', address: { '@type': 'PostalAddress', addressLocality: 'Barcelona', addressCountry: 'ES' } }
+  ],
+  hasCredential: [
+    { '@type': 'EducationalOccupationalCredential', name: 'Arquitecto y Urbanista', credentialCategory: 'degree', dateCreated: '2010', recognizedBy: { '@type': 'CollegeOrUniversity', name: 'Universidad del Desarrollo' } },
+    { '@type': 'EducationalOccupationalCredential', name: 'Máster en Infoarquitectura', credentialCategory: 'degree', dateCreated: '2015', recognizedBy: { '@type': 'EducationalOrganization', name: 'FX Animation' } }
+  ],
+  hasOccupation: { '@type': 'Occupation', name: 'Arquitecto', occupationLocation: { '@type': 'Country', name: 'Chile' } },
+  knowsAbout: ['Arquitectura residencial', 'Casas a medida', 'Urbanismo', 'Infoarquitectura'],
+  worksFor: { '@id': `${SITE}/#estudio` },
+  sameAs: [IG, 'https://www.linkedin.com/in/gonzalo-arteche-rautenberg-1939b4167/']
 };
+const SITIO = { '@type': 'WebSite', '@id': `${SITE}/#web`, name: 'Gonzalo Arteche Arquitecto', url: `${SITE}/`, inLanguage: 'es-CL', publisher: { '@id': `${SITE}/#estudio` } };
+const pagina = (tipo, url, nombre, extra = {}) => ({ '@type': tipo, '@id': `${url}#pagina`, url, name: nombre, inLanguage: 'es-CL', isPartOf: { '@id': `${SITE}/#web` }, ...extra });
+// Áreas de cada página de zona (las que nombra el texto de la página)
+const AREA_ZONA = {
+  'casas-en-maitencillo.html': ['Maitencillo'],
+  'casas-en-santo-domingo.html': ['Santo Domingo', 'Pichilemu', 'Litoral central'],
+  'casas-en-el-sur.html': ['Lago Ranco', 'Futrono', 'Puerto Varas']
+};
+const porPagina = new Map(proyectos.filter(p => p.pagina).map(p => [p.pagina, p]));
 const miga = items => ({ '@type': 'BreadcrumbList', itemListElement: items.map(([n, u], i) => ({ '@type': 'ListItem', position: i + 1, name: n, item: u })) });
 const hoy = new Date().toISOString().slice(0, 10);
 const enSitemap = [];
@@ -314,15 +351,34 @@ for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
   const url = urlDe(f), es404 = f === '404.html';
   const titulo = (h.match(/<title>([^<]*)<\/title>/) || [])[1] || '';
   const grafo = [];
-  if (f === 'index.html') grafo.push(ESTUDIO);
-  else if (f === 'estudio.html') grafo.push(PERSONA, miga([['Inicio', `${SITE}/`], ['Estudio', url]]));
-  else if (f === 'proyectos.html') grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', url]]));
-  else if (ZONAS.some(z => z.pagina === f)) grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [ZONAS.find(z => z.pagina === f).corto, url]]));
-  else if (!es404 && !['metodologia.html', 'contacto.html', 'asesoria.html'].includes(f)) {
-    const nombre = (h.match(/<h1 class="page-title">([^<]*)<\/h1>/) || [])[1] || titulo.split(' | ')[0]; // nombre visible, no el título largo para Google
-    grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [nombre, url]]),
-      { '@type': 'CreativeWork', name: nombre, url, creator: { '@id': `${SITE}/#estudio` }, image: abs((h.match(/property="og:image" content="([^"]+)"/) || [])[1] || 'img/portada.jpg') });
-  } else if (!es404) grafo.push(miga([['Inicio', `${SITE}/`], [titulo.split(' | ')[0], url]]));
+  const nombreH = titulo.split(' | ')[0];
+  if (f === 'index.html') grafo.push(SITIO, ESTUDIO, PERSONA, pagina('WebPage', url, nombreH, { about: { '@id': `${SITE}/#estudio` } }));
+  else if (f === 'estudio.html') grafo.push(PERSONA, pagina('ProfilePage', url, nombreH, { mainEntity: { '@id': `${SITE}/estudio#gonzalo` } }), miga([['Inicio', `${SITE}/`], ['Estudio', url]]));
+  else if (f === 'proyectos.html') grafo.push(pagina('CollectionPage', url, nombreH, { about: { '@id': `${SITE}/#estudio` } }), miga([['Inicio', `${SITE}/`], ['Proyectos', url]]));
+  else if (ZONAS.some(z => z.pagina === f)) {
+    const z = ZONAS.find(z => z.pagina === f);
+    const casas = proyectos.filter(p => zonaDe(p) === z && p.pagina);
+    grafo.push(
+      pagina('CollectionPage', url, nombreH, {
+        description: z.desc,
+        about: { '@type': 'Service', name: `Diseño y construcción de casas a medida en ${z.donde}`, serviceType: 'Diseño y construcción de casas a medida',
+          provider: { '@id': `${SITE}/#estudio` }, areaServed: AREA_ZONA[f].map(name => ({ '@type': 'Place', name, address: { '@type': 'PostalAddress', addressCountry: 'CL' } })) },
+        mainEntity: { '@type': 'ItemList', numberOfItems: casas.length, itemListElement: casas.map((p, i) => ({ '@type': 'ListItem', position: i + 1, name: p.nombre, url: urlDe(p.pagina) })) }
+      }),
+      miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [z.corto, url]]));
+  }
+  else if (f === 'contacto.html') grafo.push(pagina('ContactPage', url, nombreH, { about: { '@id': `${SITE}/#estudio` } }), miga([['Inicio', `${SITE}/`], ['Contacto', url]]));
+  else if (!es404 && !['metodologia.html', 'asesoria.html'].includes(f)) {
+    const p = porPagina.get(f);
+    const nombre = p?.nombre || (h.match(/<h1 class="page-title">([^<]*)<\/h1>/) || [])[1] || nombreH; // nombre visible, no el título largo para Google
+    const desc = (h.match(/<meta name="description" content="([^"]*)"/) || [])[1];
+    const obra = { '@type': 'CreativeWork', '@id': `${url}#proyecto`, name: nombre, url, creator: { '@id': `${SITE}/#estudio` },
+      image: abs((h.match(/property="og:image" content="([^"]+)"/) || [])[1] || 'img/portada.jpg'), inLanguage: 'es-CL' };
+    if (desc) obra.description = desc.replace(/&quot;/g, '"').replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/&amp;/g, '&');
+    if (p?.anio && /^\d{4}$/.test(String(p.anio).trim())) obra.dateCreated = String(p.anio).trim();
+    if (p?.ubicacion) obra.locationCreated = { '@type': 'Place', name: p.ubicacion, address: { '@type': 'PostalAddress', addressLocality: p.ubicacion.split(',')[0].trim(), addressCountry: 'CL' } };
+    grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [nombre, url]]), obra);
+  } else if (!es404) grafo.push(miga([['Inicio', `${SITE}/`], [nombreH, url]]));
   const extra = [
     es404 || !INDEXAR ? '<meta name="robots" content="noindex, nofollow">' : '',
     es404 ? '' : `<link rel="canonical" href="${url}">`,
