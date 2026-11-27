@@ -108,7 +108,7 @@ function seoProyecto(p) {
     desc = encargo ? `${base} ${encargo}` : base;
     if (desc.length > 158) desc = desc.slice(0, 155).replace(/[\s,.;:]+\S*$/, '') + '…';
   }
-  return { titulo, desc };
+  return { titulo, desc, largo: auto };
 }
 
 for (const p of proyectos) {
@@ -126,12 +126,13 @@ for (const p of proyectos) {
     ? `<div class="encargo"><h2 class="label">Encargo</h2>${p.encargo.trim().split(/\n\s*\n/).map(t => `<p>${esc(t.trim())}</p>`).join('')}</div>`
     : '';
   const portSrc = p.portada || galeria[0]?.foto; // foto cuadrada que abre la ficha
+  const { titulo: tituloSeo, desc, largo } = seoProyecto(p);
   let gal = '';
   for (const [i, g] of galeria.entries()) {
     if (g.foto === portSrc) continue; // ya se muestra arriba
     const f = await photo(g.foto); if (!f) continue;
     const forma = FORM[g.formato] || 'sq', pos = POS[g.encuadre] || POS['Centro'];
-    const alt = esc(g.descripcion || `${p.nombre}, imagen ${i + 1}`);
+    const alt = esc(g.descripcion || `${largo}, ${p.renders ? 'render' : 'imagen'} ${i + 1}`);
     // el navegador elige la versión grande cuando la foto ocupa mucho ancho (pantallas grandes o de alta densidad)
     const sizes = (forma === 'wide' || forma === 'pano') ? '(min-width:1600px) 1520px, 94vw' : '(min-width:700px) 47vw, 94vw';
     const srcset = f.sm !== f.lg ? ` srcset="${f.sm} 900w, ${f.lg} 2000w" sizes="${sizes}"` : '';
@@ -139,9 +140,8 @@ for (const p of proyectos) {
   }
   const port = await photo(p.portada || galeria[0]?.foto);
   const sq = await crop(portSrc, [[800, 800], [1400, 1400]]);
-  const fotoHtml = sq ? `<figure class="p-foto"><img src="${sq.src}"${sq.srcset} sizes="(min-width:900px) 50vw, 100vw" alt="${esc(p.nombre)}" fetchpriority="high"></figure>` : '';
+  const fotoHtml = sq ? `<figure class="p-foto"><img src="${sq.src}"${sq.srcset} sizes="(min-width:900px) 50vw, 100vw" alt="${esc(largo)}" fetchpriority="high"></figure>` : '';
   const tplUse = programa ? tplP : tplP.replace(/\s*<h2 class="label">Programa<\/h2>\s*<ul class="recintos">%%PROGRAMA%%<\/ul>/, '');
-  const { titulo: tituloSeo, desc } = seoProyecto(p);
   const html = tplUse.replaceAll('%%TITULO%%', esc(tituloSeo)).replaceAll('%%NOMBRE%%', esc(p.nombre)).replaceAll('%%DESC%%', esc(desc)).replace('%%OGIMG%%', port ? port.lg : 'img/portada.jpg')
     .replace('%%FOTO%%', fotoHtml).replace('%%FICHA%%', ficha).replace('%%PROGRAMA%%', programa).replace('%%NOTA%%', nota).replace('%%ENCARGO%%', encargo).replace('%%GALERIA%%', gal);
   fs.writeFileSync(path.join(OUT, p.pagina), html);
@@ -154,7 +154,7 @@ for (const p of proyectos) {
   const meta = [p.ubicacion, p.anio, p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(' · ');
   const badge = p.estado && p.estado !== 'Construido' ? `<span class="badge">${esc(p.estado)}</span>` : '';
   const th = await crop(p.portada || (p.galeria || [])[0]?.foto, [[640, 800], [1120, 1400]]);
-  const media = th ? `<img src="${th.src}"${th.srcset} sizes="(min-width:1100px) 31vw, (min-width:620px) 47vw, 94vw" alt="${esc(p.nombre)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
+  const media = th ? `<img src="${th.src}"${th.srcset} sizes="(min-width:1100px) 31vw, (min-width:620px) 47vw, 94vw" alt="${esc(seoProyecto(p).largo)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
   const open = p.pagina ? `<a href="${p.pagina}">` : '<a>';
   cards += `        <li class="card" data-cat="${esc(p.categoria)}">
           ${open}
@@ -212,11 +212,16 @@ const urlDe = f => f === 'index.html' ? `${SITE}/` : `${SITE}/${encodeURI(f.repl
 const ESTUDIO = {
   '@type': 'ProfessionalService', '@id': `${SITE}/#estudio`,
   name: 'Gonzalo Arteche Arquitecto', url: `${SITE}/`,
-  description: 'Estudio de arquitectura en Santiago. Diseño y dirección de obra de viviendas y espacios comerciales en todo Chile.',
+  description: 'Estudio de arquitectura en Lo Barnechea, Santiago. Diseño y construcción de casas a medida en todo Chile, con constructoras de confianza.',
   logo: abs('apple-touch-icon.png'), image: abs('img/portada.jpg'),
-  telephone: '+56992511880', email: 'contacto@artechearquitecto.com', foundingDate: '2016',
-  address: { '@type': 'PostalAddress', addressLocality: 'Santiago', addressRegion: 'Región Metropolitana', addressCountry: 'CL' },
-  areaServed: { '@type': 'Country', name: 'Chile' },
+  telephone: '+56992511880', email: 'contacto@artechearquitecto.com', foundingDate: '2014',
+  address: { '@type': 'PostalAddress', addressLocality: 'Lo Barnechea', addressRegion: 'Región Metropolitana', addressCountry: 'CL' },
+  // Todo Chile, más las zonas donde el estudio tiene obra (costa de la V Región y litoral, y el sur)
+  areaServed: [
+    { '@type': 'Country', name: 'Chile' },
+    ...['Región de Valparaíso', "Región del Libertador General Bernardo O'Higgins", 'Región de Los Ríos', 'Región de Los Lagos'].map(name => ({ '@type': 'AdministrativeArea', name })),
+    ...['Maitencillo', 'Zapallar', 'Santo Domingo', 'Pichilemu', 'Lago Ranco', 'Futrono', 'Puerto Varas'].map(name => ({ '@type': 'Place', name }))
+  ],
   founder: { '@id': `${SITE}/estudio#gonzalo` },
   sameAs: ['https://www.instagram.com/gonzalo_arteche_arquitecto/', 'https://www.linkedin.com/in/gonzalo-arteche-rautenberg-1939b4167/', 'https://www.facebook.com/profile.php?id=100065340315698']
 };
