@@ -136,6 +136,10 @@ img{display:block;max-width:100%}
 .fchip{min-height:44px;padding:0 18px;border:1px solid rgba(30,30,30,.25);border-radius:999px;background:transparent;font:inherit;font-size:clamp(14px,1.05vw,15px);color:var(--ink);cursor:pointer;transition:background .2s,color .2s,border-color .2s}
 .fchip:hover{border-color:rgba(30,30,30,.55)}
 .fchip.on{background:var(--navy);border-color:var(--navy);color:#fff}
+.zonas{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:14px}
+.zonas-t{margin-right:6px;font-size:clamp(13px,1vw,15px);color:var(--muted)}
+.zchip{display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border:1px solid rgba(30,30,30,.25);border-radius:999px;font-size:clamp(14px,1.05vw,15px);color:var(--ink);text-decoration:none;transition:border-color .2s}
+.zchip:hover{border-color:rgba(30,30,30,.55)}
 .count{margin:clamp(18px,2vw,26px) 0 clamp(26px,3vw,40px);font-size:clamp(13px,1vw,15px);color:var(--muted)}
 .cards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr;gap:clamp(32px,3.4vw,52px) clamp(18px,2vw,28px)}
 @media (min-width:620px){ .cards{grid-template-columns:repeat(2,minmax(0,1fr))} }
@@ -168,6 +172,8 @@ img{display:block;max-width:100%}
 .actions{display:flex;flex-wrap:wrap;align-items:center;gap:18px clamp(24px,3.5vw,48px);margin-top:clamp(32px,4vw,52px)}
 .pill{display:inline-flex;align-items:center;gap:clamp(14px,1.6vw,24px);min-height:clamp(52px,5vw,72px);padding:0 clamp(24px,2.6vw,38px);border-radius:999px;background:var(--cream);color:var(--ink);font-size:clamp(16px,1.5vw,22px);font-weight:400;letter-spacing:.02em;transition:background .2s}
 .pill:hover{background:#fff}
+.pill.pill-line{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.95)}
+.pill.pill-line:hover{background:rgba(255,255,255,.12)}
 .link{display:inline-flex;align-items:center;gap:clamp(12px,1.4vw,20px);min-height:44px;border-bottom:1px solid rgba(255,255,255,.9);font-size:clamp(15px,1.3vw,19px);font-weight:300;letter-spacing:.01em}
 .link:hover{border-bottom-color:transparent}
 .arrow{width:1.2em;height:.9em;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .2s}
@@ -332,6 +338,7 @@ img{display:block;max-width:100%}
   <section class="grid-sec">
     <div class="wrap">
       <div class="filters" role="group" aria-label="Filtrar proyectos"><button class="fchip on" type="button" data-f="Todos" aria-pressed="true">Todos</button><button class="fchip" type="button" data-f="Casas" aria-pressed="false">Casas</button><button class="fchip" type="button" data-f="Comercial" aria-pressed="false">Comercial</button><button class="fchip" type="button" data-f="Quinchos" aria-pressed="false">Quinchos</button><button class="fchip" type="button" data-f="Remodelaciones" aria-pressed="false">Remodelaciones</button></div>
+      %%ZONAS%%
       <p class="count" id="count" aria-live="polite">%%COUNT%%</p>
       <ul class="cards" id="cards">
 %%CARDS%%
