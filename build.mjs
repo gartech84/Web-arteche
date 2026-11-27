@@ -149,7 +149,7 @@ for (const p of proyectos) {
   const programa = (p.programa || []).filter(Boolean).map(r => `<li>${esc(r)}</li>`).join('');
   const nota = p.renders ? '<p class="nota">Imágenes: renders del proyecto.</p>' : '';
   const encargo = (p.encargo || '').trim()
-    ? `<div class="encargo"><h2 class="label">Encargo</h2>${p.encargo.trim().split(/\n\s*\n/).map(t => `<p>${esc(t.trim())}</p>`).join('')}</div>`
+    ? `<details class="encargo"><summary class="label">Ver encargo</summary><div class="encargo-txt">${p.encargo.trim().split(/\n\s*\n/).map(t => `<p>${esc(t.trim())}</p>`).join('')}</div></details>` // plegado con <details>: el texto va completo en el HTML, así Google y las IA lo leen
     : '';
   const portSrc = p.portada || galeria[0]?.foto; // foto cuadrada que abre la ficha
   const { titulo: tituloSeo, desc, largo } = seoProyecto(p);
