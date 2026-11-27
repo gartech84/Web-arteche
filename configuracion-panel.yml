@@ -80,6 +80,14 @@ content:
     description: 'Un recinto por línea. Ej: 4 dormitorios'
     type: string
     list: true
+  - name: titulo_google
+    label: Título para Google (opcional)
+    description: 'Déjalo vacío y se arma solo con el nombre, el tipo y el lugar (ej: Casa Maitenes, casa de playa en Maitencillo). Escribe aquí solo si quieres otro. No cambia el nombre que se ve en la ficha.'
+    type: string
+  - name: descripcion_google
+    label: Descripción para Google (opcional)
+    description: Texto corto (hasta unos 155 caracteres) que aparece bajo el título en los resultados de Google. Vacío, se arma solo con el tipo, la superficie, la ubicación y el encargo.
+    type: text
   - name: encargo
     label: Encargo
     description: Aparece bajo el Programa en la ficha del proyecto. Máximo 80 palabras.

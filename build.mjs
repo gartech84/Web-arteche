@@ -78,6 +78,39 @@ const proyectos = fs.readdirSync(dirP).filter(f => f.endsWith('.json')).map(f =>
 
 // 4) Fichas individuales
 const tplP = fs.readFileSync('templates/proyecto.html', 'utf8');
+
+// Título y descripción para Google de cada ficha. El nombre visible del proyecto no cambia.
+// Se arman con la categoría, la ubicación y la superficie que ya están en el CMS, para que la gente
+// encuentre la casa buscando el lugar ("casa de playa en Maitencillo") y no solo el nombre del proyecto.
+// Si en el CMS se llenan "Título para Google" o "Descripción para Google", se usan esos textos tal cual.
+const PLAYA = ['maitencillo', 'santo domingo', 'pichilemu', 'zapallar', 'cachagua', 'papudo', 'tunquén', 'matanzas', 'puchuncaví', 'algarrobo', 'navidad', 'la ligua'];
+const LAGO = ['lago ranco', 'futrono', 'puerto varas', 'frutillar', 'llanquihue', 'pucón', 'villarrica', 'panguipulli'];
+const TIPO = { 'Casas': 'casa', 'Quinchos': 'quincho', 'Remodelaciones': 'remodelación', 'Comercial': 'proyecto comercial' };
+function seoProyecto(p) {
+  const nombre = (p.nombre || '').trim();
+  const ubic = (p.ubicacion || '').trim();
+  const lugar = ubic.split(',')[0].trim();
+  const l = lugar.toLowerCase();
+  let tipo = TIPO[p.categoria] || '';
+  if (tipo === 'casa' && PLAYA.includes(l)) tipo = 'casa de playa';
+  else if (tipo === 'casa' && LAGO.includes(l)) tipo = 'casa de lago';
+  // "Casa Maitenes, casa de playa en Maitencillo". Si el nombre ya dice el tipo ("Quincho Matte"), basta con "Quincho Matte en La Reina".
+  const sobra = !tipo || tipo === 'proyecto comercial' || nombre.toLowerCase() === tipo || nombre.toLowerCase().startsWith(tipo + ' ');
+  let auto = sobra ? nombre : `${nombre}, ${tipo}`;
+  if (lugar) auto += ` en ${lugar}`;
+  const titulo = ((p.titulo_google || '').trim() || auto) + ' | Gonzalo Arteche Arquitecto';
+  const queEs = tipo ? tipo[0].toUpperCase() + tipo.slice(1) : 'Proyecto';
+  const base = [queEs, p.superficie ? `de ${p.superficie} m²` : '', ubic ? `en ${ubic}` : ''].filter(Boolean).join(' ')
+    + `. ${nombre}, proyecto de Gonzalo Arteche Arquitecto.`;
+  const encargo = (p.encargo || '').trim().replace(/\s+/g, ' ');
+  let desc = (p.descripcion_google || '').trim();
+  if (!desc) {
+    desc = encargo ? `${base} ${encargo}` : base;
+    if (desc.length > 158) desc = desc.slice(0, 155).replace(/[\s,.;:]+\S*$/, '') + '…';
+  }
+  return { titulo, desc };
+}
+
 for (const p of proyectos) {
   const galeria = (p.galeria || []).filter(g => g && g.foto);
   if (!p.portada && !galeria.length) continue; // sin fotos: solo aparece en la grilla como "Foto pendiente"
@@ -108,10 +141,8 @@ for (const p of proyectos) {
   const sq = await crop(portSrc, [[800, 800], [1400, 1400]]);
   const fotoHtml = sq ? `<figure class="p-foto"><img src="${sq.src}"${sq.srcset} sizes="(min-width:900px) 50vw, 100vw" alt="${esc(p.nombre)}" fetchpriority="high"></figure>` : '';
   const tplUse = programa ? tplP : tplP.replace(/\s*<h2 class="label">Programa<\/h2>\s*<ul class="recintos">%%PROGRAMA%%<\/ul>/, '');
-  const descAuto = [p.nombre, [CAT1[p.categoria] ? CAT1[p.categoria].toLowerCase() : '', p.ubicacion ? `en ${p.ubicacion}` : ''].filter(Boolean).join(' '), p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(', ') + '. Proyecto de Gonzalo Arteche Arquitecto.';
-  const resumen = (p.encargo || '').trim().replace(/\s+/g, ' ');
-  const desc = resumen ? (resumen.length > 158 ? resumen.slice(0, 155).replace(/[\s,.;:]+\S*$/, '') + '…' : resumen) : descAuto;
-  const html = tplUse.replaceAll('%%NOMBRE%%', esc(p.nombre)).replaceAll('%%DESC%%', esc(desc)).replace('%%OGIMG%%', port ? port.lg : 'img/portada.jpg')
+  const { titulo: tituloSeo, desc } = seoProyecto(p);
+  const html = tplUse.replaceAll('%%TITULO%%', esc(tituloSeo)).replaceAll('%%NOMBRE%%', esc(p.nombre)).replaceAll('%%DESC%%', esc(desc)).replace('%%OGIMG%%', port ? port.lg : 'img/portada.jpg')
     .replace('%%FOTO%%', fotoHtml).replace('%%FICHA%%', ficha).replace('%%PROGRAMA%%', programa).replace('%%NOTA%%', nota).replace('%%ENCARGO%%', encargo).replace('%%GALERIA%%', gal);
   fs.writeFileSync(path.join(OUT, p.pagina), html);
 }
@@ -207,7 +238,7 @@ for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
   else if (f === 'estudio.html') grafo.push(PERSONA, miga([['Inicio', `${SITE}/`], ['Estudio', url]]));
   else if (f === 'proyectos.html') grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', url]]));
   else if (!es404 && !['metodologia.html', 'contacto.html'].includes(f)) {
-    const nombre = titulo.split(' | ')[0];
+    const nombre = (h.match(/<h1 class="page-title">([^<]*)<\/h1>/) || [])[1] || titulo.split(' | ')[0]; // nombre visible, no el título largo para Google
     grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [nombre, url]]),
       { '@type': 'CreativeWork', name: nombre, url, creator: { '@id': `${SITE}/#estudio` }, image: abs((h.match(/property="og:image" content="([^"]+)"/) || [])[1] || 'img/portada.jpg') });
   } else if (!es404) grafo.push(miga([['Inicio', `${SITE}/`], [titulo.split(' | ')[0], url]]));
