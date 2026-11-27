@@ -120,11 +120,12 @@ const ZONAS = [
     titulo: 'Arquitecto en Maitencillo, casas a medida',
     desc: 'Diseño y construcción de casas a medida en Maitencillo, con constructoras de confianza que conocen la zona. Mira las casas que hemos proyectado ahí.',
     lema: 'Casas a medida en Maitencillo.' },
-  { pagina: 'casas-en-santo-domingo.html', corto: 'Santo Domingo', donde: 'Santo Domingo',
-    lugares: ['santo domingo'],
-    titulo: 'Arquitecto en Santo Domingo, casas a medida',
-    desc: 'Diseño y construcción de casas a medida en Santo Domingo, con constructoras de confianza que conocen la zona. Mira las casas que hemos proyectado ahí.',
-    lema: 'Casas a medida en Santo Domingo.' },
+  { pagina: 'casas-en-santo-domingo.html', corto: 'Santo Domingo y Pichilemu', donde: 'Santo Domingo y Pichilemu',
+    terreno: 'Santo Domingo, Pichilemu o el litoral central',
+    lugares: ['santo domingo', 'pichilemu', 'algarrobo', 'el quisco', 'el tabo', 'cartagena', 'las cruces', 'navidad', 'matanzas', 'tunquén'],
+    titulo: 'Arquitecto en Santo Domingo y Pichilemu, casas a medida',
+    desc: 'Diseño y construcción de casas a medida en Santo Domingo, Pichilemu y el litoral central, con constructoras de confianza que conocen la zona.',
+    lema: 'Casas a medida en Santo Domingo y Pichilemu.' },
   { pagina: 'casas-en-el-sur.html', corto: 'Sur de Chile', donde: 'el sur de Chile',
     lugares: ['lago ranco', 'futrono', 'puerto varas', 'frutillar', 'llanquihue', 'pucón', 'villarrica', 'panguipulli', 'valdivia', 'villa cerro castillo'],
     titulo: 'Arquitecto en Lago Ranco, Futrono y Puerto Varas',
@@ -220,7 +221,7 @@ for (const { z, casas } of conCasas) {
   const cta = `
   <section class="cta" aria-labelledby="t-cta">
     <div class="wrap">
-      <h2 class="h2" id="t-cta">¿Tienes un terreno en ${esc(z.donde)}?</h2>
+      <h2 class="h2" id="t-cta">¿Tienes un terreno en ${esc(z.terreno || z.donde)}?</h2>
       <p class="body">Nos hacemos cargo del diseño, la documentación para construir y la coordinación de la ITO. La obra la ejecutan constructoras de nuestra confianza que conocen la zona, y tú tienes un solo responsable de principio a fin.</p>
       <p class="body">Cuéntanos qué casa necesitas y coordinamos una reunión, virtual o presencial. También diseñamos y construimos en el resto de Chile.</p>
       <div class="actions">
