@@ -111,6 +111,31 @@ function seoProyecto(p) {
   return { titulo, desc, largo: auto };
 }
 
+// Páginas de zona: agrupan las casas de un lugar para que Google las muestre en búsquedas como
+// "arquitecto Maitencillo". Se arman solas con las casas del CMS cuya ubicación calza con "lugares".
+// No se agregan al menú: se enlazan desde /proyectos ("Por zona") y desde la ubicación de cada ficha.
+const ZONAS = [
+  { pagina: 'casas-en-maitencillo.html', corto: 'Maitencillo', donde: 'Maitencillo',
+    lugares: ['maitencillo'],
+    titulo: 'Arquitecto en Maitencillo, casas a medida',
+    desc: 'Diseño y construcción de casas a medida en Maitencillo, con constructoras de confianza que conocen la zona. Mira las casas que hemos proyectado ahí.',
+    lema: 'Casas a medida en Maitencillo.' },
+  { pagina: 'casas-en-santo-domingo.html', corto: 'Santo Domingo y Pichilemu', donde: 'Santo Domingo y Pichilemu',
+    terreno: 'Santo Domingo, Pichilemu o el litoral central',
+    lugares: ['santo domingo', 'pichilemu', 'algarrobo', 'el quisco', 'el tabo', 'cartagena', 'las cruces', 'navidad', 'matanzas', 'tunquén'],
+    titulo: 'Arquitecto en Santo Domingo y Pichilemu, casas a medida',
+    desc: 'Diseño y construcción de casas a medida en Santo Domingo, Pichilemu y el litoral central, con constructoras de confianza que conocen la zona.',
+    lema: 'Casas a medida en Santo Domingo y Pichilemu.' },
+  { pagina: 'casas-en-el-sur.html', corto: 'Sur de Chile', donde: 'el sur de Chile',
+    lugares: ['lago ranco', 'futrono', 'puerto varas', 'frutillar', 'llanquihue', 'pucón', 'villarrica', 'panguipulli', 'valdivia', 'villa cerro castillo'],
+    titulo: 'Arquitecto en Lago Ranco, Futrono y Puerto Varas',
+    desc: 'Diseño y construcción de casas a medida en el sur de Chile: Lago Ranco, Futrono, Puerto Varas y los lagos. Constructoras de confianza que conocen la zona.',
+    lema: 'Casas a medida en el sur de Chile.',
+    extra: 'Trabajamos en Lago Ranco, Futrono, Puerto Varas y el resto de los lagos del sur.' }
+];
+const lugarDe = p => ((p.ubicacion || '').split(',')[0] || '').trim().toLowerCase();
+const zonaDe = p => p.categoria === 'Casas' ? ZONAS.find(z => z.lugares.includes(lugarDe(p))) : undefined;
+
 for (const p of proyectos) {
   const galeria = (p.galeria || []).filter(g => g && g.foto);
   if (!p.portada && !galeria.length) continue; // sin fotos: solo aparece en la grilla como "Foto pendiente"
@@ -119,7 +144,8 @@ for (const p of proyectos) {
     ['Ubicación', p.ubicacion], ['Año', p.anio], ['Superficie', p.superficie ? `${p.superficie} m²` : ''],
     ['Pisos', p.pisos], ['Materialidad', p.materialidad] // Estado y Categoría no se muestran en la ficha (siguen usándose en los filtros)
   ].filter(([, v]) => v !== undefined && v !== null && String(v).trim() !== '');
-  const ficha = datos.map(([k, v]) => `<div class="dato"><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('');
+  const zp = zonaDe(p);
+  const ficha = datos.map(([k, v]) => `<div class="dato"><dt>${k}</dt><dd>${k === 'Ubicación' && zp ? `<a href="${zp.pagina}" style="text-decoration:underline;text-underline-offset:3px">${esc(v)}</a>` : esc(v)}</dd></div>`).join('');
   const programa = (p.programa || []).filter(Boolean).map(r => `<li>${esc(r)}</li>`).join('');
   const nota = p.renders ? '<p class="nota">Imágenes: renders del proyecto.</p>' : '';
   const encargo = (p.encargo || '').trim()
@@ -148,15 +174,14 @@ for (const p of proyectos) {
 }
 
 // 5) Grilla de proyectos
-let cards = '';
-for (const p of proyectos) {
+async function tarjeta(p) {
   const port = await photo(p.portada || (p.galeria || [])[0]?.foto);
   const meta = [p.ubicacion, p.anio, p.superficie ? `${p.superficie} m²` : ''].filter(Boolean).join(' · ');
   const badge = p.estado && p.estado !== 'Construido' ? `<span class="badge">${esc(p.estado)}</span>` : '';
   const th = await crop(p.portada || (p.galeria || [])[0]?.foto, [[640, 800], [1120, 1400]]);
   const media = th ? `<img src="${th.src}"${th.srcset} sizes="(min-width:1100px) 31vw, (min-width:620px) 47vw, 94vw" alt="${esc(seoProyecto(p).largo)}" loading="lazy">${badge}` : '<span class="soon">Foto pendiente</span>';
   const open = p.pagina ? `<a href="${p.pagina}">` : '<a>';
-  cards += `        <li class="card" data-cat="${esc(p.categoria)}">
+  return `        <li class="card" data-cat="${esc(p.categoria)}">
           ${open}
             <span class="card-ph">${media}</span>
             <span class="card-info">
@@ -166,11 +191,61 @@ for (const p of proyectos) {
           </a>
         </li>\n`;
 }
+let cards = '';
+for (const p of proyectos) cards += await tarjeta(p);
 const primera = proyectos.find(p => p.portada);
 const og = primera ? (await photo(primera.portada)).lg : 'img/portada.jpg';
-const idx = fs.readFileSync('templates/proyectos.html', 'utf8')
-  .replace('%%CARDS%%', cards.trimEnd()).replace('%%COUNT%%', `${proyectos.length} ${proyectos.length === 1 ? 'proyecto seleccionado' : 'proyectos seleccionados'}`).replace('%%OGIMG%%', og);
+const tplIdx = fs.readFileSync('templates/proyectos.html', 'utf8');
+const conCasas = ZONAS.map(z => ({ z, casas: proyectos.filter(p => zonaDe(p) === z) })).filter(x => x.casas.length);
+const zonasNav = conCasas.length
+  ? `<nav class="zonas" aria-label="Casas por zona"><span class="zonas-t">Casas por zona</span>${conCasas.map(({ z }) => `<a class="zchip" href="${z.pagina}">${esc(z.corto)}</a>`).join('')}</nav>`
+  : '';
+const idx = tplIdx
+  .replace('%%CARDS%%', cards.trimEnd()).replace('%%COUNT%%', `${proyectos.length} ${proyectos.length === 1 ? 'proyecto seleccionado' : 'proyectos seleccionados'}`).replace('%%OGIMG%%', og)
+  .replace('%%ZONAS%%', zonasNav);
 fs.writeFileSync(path.join(OUT, 'proyectos.html'), idx);
+
+// 5b) Páginas de zona (mismo diseño que /proyectos, sin filtros y con llamado a contacto)
+const WA = 'https://wa.me/56992511880';
+const flecha = '<svg class="arrow" viewBox="0 0 27 20" aria-hidden="true"><path d="M1 10h25M17 1l9 9-9 9"/></svg>';
+for (const { z, casas } of conCasas) {
+  const m2 = casas.map(p => Number(p.superficie)).filter(Boolean);
+  const n = casas.length;
+  const rango = m2.length > 1 ? `, de ${Math.min(...m2)} a ${Math.max(...m2)}\u00a0m²` : m2.length ? ` de ${m2[0]}\u00a0m²` : '';
+  const intro = `${n === 1 ? 'Esta es la casa' : `Estas son las ${n} casas`} que hemos proyectado en ${z.donde}${rango}.${z.extra ? ' ' + z.extra : ''}`;
+  let zc = '';
+  for (const p of casas) zc += await tarjeta(p);
+  const portZ = casas.find(p => p.portada);
+  const ogZ = portZ ? (await photo(portZ.portada)).lg : og;
+  const titulo = `${z.titulo} | Gonzalo Arteche Arquitecto`;
+  const cta = `
+  <section class="cta" aria-labelledby="t-cta">
+    <div class="wrap">
+      <h2 class="h2" id="t-cta">¿Tienes un terreno en ${esc(z.terreno || z.donde)}?</h2>
+      <p class="body">Nos hacemos cargo del diseño, la documentación para construir y la coordinación de la ITO. La obra la ejecutan constructoras de nuestra confianza que conocen la zona, y tú tienes un solo responsable de principio a fin.</p>
+      <p class="body">Cuéntanos qué casa necesitas y coordinamos una reunión, virtual o presencial. También diseñamos y construimos en el resto de Chile.</p>
+      <div class="actions">
+        <a class="pill" href="contacto.html">Hablemos de tu casa${flecha}</a>
+        <a class="pill pill-line" href="${WA}" target="_blank" rel="noopener">Escríbenos por WhatsApp${flecha}</a>
+      </div>
+    </div>
+  </section>
+</main>`;
+  const html = tplIdx
+    .replace(/<title>[^<]*<\/title>/, `<title>${esc(titulo)}</title>`)
+    .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(z.desc)}">`)
+    .replace(/<meta property="og:title" content="[^"]*">/, `<meta property="og:title" content="${esc(titulo)}">`)
+    .replace(/<meta property="og:description" content="[^"]*">/, `<meta property="og:description" content="${esc(z.desc)}">`)
+    .replace(/<h1 class="label page-label">[^<]*<\/h1>\s*<p class="page-title">[^<]*<\/p>\s*<p class="page-intro">[^<]*<\/p>/,
+      `<p class="label page-label"><a href="proyectos.html" style="color:inherit">Proyectos</a> / ${esc(z.corto)}</p>\n    <h1 class="page-title">${esc(z.lema)}</h1>\n    <p class="page-intro">${esc(intro)}</p>`)
+    .replace(/<div class="filters"[\s\S]*?<\/div>\s*/, '')
+    .replace('%%ZONAS%%', '')
+    .replace('%%COUNT%%', `${n} ${n === 1 ? 'casa' : 'casas'} en ${esc(z.donde)}`)
+    .replace('%%CARDS%%', zc.trimEnd())
+    .replace('%%OGIMG%%', ogZ)
+    .replace(/\s*<\/main>/, cta);
+  fs.writeFileSync(path.join(OUT, z.pagina), html);
+}
 
 
 // 5c) Redirecciones desde las direcciones antiguas de Wix
@@ -242,7 +317,8 @@ for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
   if (f === 'index.html') grafo.push(ESTUDIO);
   else if (f === 'estudio.html') grafo.push(PERSONA, miga([['Inicio', `${SITE}/`], ['Estudio', url]]));
   else if (f === 'proyectos.html') grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', url]]));
-  else if (!es404 && !['metodologia.html', 'contacto.html'].includes(f)) {
+  else if (ZONAS.some(z => z.pagina === f)) grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [ZONAS.find(z => z.pagina === f).corto, url]]));
+  else if (!es404 && !['metodologia.html', 'contacto.html', 'asesoria.html'].includes(f)) {
     const nombre = (h.match(/<h1 class="page-title">([^<]*)<\/h1>/) || [])[1] || titulo.split(' | ')[0]; // nombre visible, no el título largo para Google
     grafo.push(miga([['Inicio', `${SITE}/`], ['Proyectos', `${SITE}/proyectos`], [nombre, url]]),
       { '@type': 'CreativeWork', name: nombre, url, creator: { '@id': `${SITE}/#estudio` }, image: abs((h.match(/property="og:image" content="([^"]+)"/) || [])[1] || 'img/portada.jpg') });
