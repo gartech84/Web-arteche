@@ -222,7 +222,7 @@ for (const { z, casas } of conCasas) {
   <section class="cta" aria-labelledby="t-cta">
     <div class="wrap">
       <h2 class="h2" id="t-cta">¿Tienes un terreno en ${esc(z.terreno || z.donde)}?</h2>
-      <p class="body">Nos hacemos cargo del diseño, la documentación para construir y la coordinación de la ITO. La obra la ejecutan constructoras de nuestra confianza que conocen la zona, y tú tienes un solo responsable de principio a fin.</p>
+      <p class="body">Nos hacemos cargo del diseño, la documentación para construir y la coordinación de las obras. La obra la ejecutan constructoras de nuestra confianza que conocen la zona, y tú tienes un solo responsable de principio a fin.</p>
       <p class="body">Cuéntanos qué casa necesitas y coordinamos una reunión, virtual o presencial. También diseñamos y construimos en el resto de Chile.</p>
       <div class="actions">
         <a class="pill" href="contacto.html">Hablemos de tu casa${flecha}</a>
