@@ -292,6 +292,27 @@ document.addEventListener('DOMContentLoaded',function(){var s=document.getElemen
   }
   console.log(`Pixel de Meta: activado (ID ${META_PIXEL_ID}).`);
 }
+// Etiqueta de Google Ads (AW-11294839356): mide las conversiones de la campaña de búsqueda.
+// "Web - Formulario enviado" cuando aparece el aviso de mensaje enviado (#sent) y
+// "Web - Clic en WhatsApp" al hacer clic en un enlace de WhatsApp. Se agrega a todas las páginas.
+const GADS_ID = 'AW-11294839356';
+const GADS_FORMULARIO = `${GADS_ID}/3arVCOCxx8AdELyk5okq`;
+const GADS_WHATSAPP = `${GADS_ID}/3Ui6COOxx8AdELyk5okq`;
+{
+  const tag = `<script async src="https://www.googletagmanager.com/gtag/js?id=${GADS_ID}"></script>
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+gtag('js',new Date());gtag('config','${GADS_ID}');
+document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href*="wa.me"],a[href*="whatsapp"]');if(a)gtag('event','conversion',{send_to:'${GADS_WHATSAPP}'});});
+document.addEventListener('DOMContentLoaded',function(){var s=document.getElementById('sent');if(!s)return;new MutationObserver(function(m,o){if(!s.hidden){gtag('event','conversion',{send_to:'${GADS_FORMULARIO}'});o.disconnect();}}).observe(s,{attributes:true,attributeFilter:['hidden']});});
+</script>
+`;
+  for (const f of fs.readdirSync(OUT).filter(f => f.endsWith('.html'))) {
+    const p = path.join(OUT, f);
+    fs.writeFileSync(p, fs.readFileSync(p, 'utf8').replace('</head>', tag + '</head>'));
+  }
+  console.log(`Google Ads: etiqueta activada (${GADS_ID}).`);
+}
 
 console.log(INDEXAR ? `SEO: indexación activada para ${SITE}` : 'SEO: modo prueba (noindex en todas las páginas)');
 
